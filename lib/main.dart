@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'authentication/auth.dart';
 import 'authentication/base_auth.dart';
 import 'authentication/store/authentication.dart';
+import 'goals/store/goalStore.dart';
 import 'home_page.dart';
 
 Future<void> main() async {
@@ -19,6 +20,7 @@ Future<void> main() async {
   runApp(MultiProvider(providers: [
     Provider(create: (_) => AuthenticationStore(auth: _auth)),
     Provider(create: (_) => SettingsStore(preferences: _preferences)),
+    Provider(create: (_) => GoalStore(preferences: _preferences))
   ], child: MyApp()));
 }
 
