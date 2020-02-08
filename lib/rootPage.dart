@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:portfolio/black_rock/black_rock_api.dart';
+import 'package:portfolio/black_rock/black_rock_api_portfolio.dart';
 import 'package:provider/provider.dart';
 
 import 'authentication/auth_page.dart';
