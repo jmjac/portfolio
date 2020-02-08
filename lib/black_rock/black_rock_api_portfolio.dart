@@ -9,6 +9,7 @@ class BlackRockAPIPortfolio {
 
   Map<String, double> positionsMap;
   List<String> positionsNames;
+  int startDate;
   bool calculateExposures;
   bool calculatePerformance;
   bool calculateStressTests;
@@ -17,12 +18,14 @@ class BlackRockAPIPortfolio {
 
   BlackRockAPIPortfolio(
       {Map<String, double> positions,
+      int startDate,
       bool calculateExposures,
       bool calculatePerformance,
       bool calculateStressTests,
       bool calculateRisk,
       bool calculateExpectedReturns}) {
     this.positionsMap = positions;
+    this.startDate = startDate;
     this.calculatePerformance = calculatePerformance;
     this.calculateExposures = calculateExposures;
     this.calculateExpectedReturns = calculateExpectedReturns;
@@ -32,6 +35,9 @@ class BlackRockAPIPortfolio {
   }
 
   void _buildBaseUrl() {
+    if (startDate != null) {
+      _addStartDate(startDate);
+    }
     if (calculateExposures != null) {
       _addCalculateExposures(calculateExposures);
     }
@@ -72,6 +78,11 @@ class BlackRockAPIPortfolio {
       positionsParameter += "$position~${positions[position]}%7C";
     }
     return positionsParameter;
+  }
+
+  void _addStartDate(int value) {
+    _baseUrl += _baseUrl.endsWith("?") ? "" : "&";
+    _baseUrl += "&startDate=$value";
   }
 
   void _addCalculateExposures(bool value) {
