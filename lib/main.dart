@@ -31,6 +31,7 @@ Future<void> main() async {
     Provider(create: (_) => GoalStore(preferences: _preferences)),
     Provider(create: (_) => BlackRockStore(portfolio)),
     Provider(create: (_) => InvestmentStore(portfolio)),
+    Provider(create: (_) => GoalStore(preferences: _preferences))
   ], child: MyApp()));
 }
 

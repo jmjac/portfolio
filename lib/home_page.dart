@@ -5,11 +5,12 @@ import 'package:portfolio/settings/settings_page.dart';
 import 'package:provider/provider.dart';
 import 'authentication/store/authentication.dart';
 import 'black_rock/black_rock_api_portfolio.dart';
+import 'goals/goal_page.dart';
 import 'goals/store/goalStore.dart';
 
 class HomePage extends StatelessWidget {
   final pages = <StatelessWidget>[
-    BlackRockPage(),
+    GoalPage(),
     InvestmentPage(),
     BlackRockPage()
   ];

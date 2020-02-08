@@ -8,14 +8,15 @@ import 'package:provider/provider.dart';
 class InvestmentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final InvestmentStore investmentStore = Provider.of<InvestmentStore>(context);
+    final InvestmentStore investmentStore =
+        Provider.of<InvestmentStore>(context);
     investmentStore.calculateChange();
     return Column(
       children: <Widget>[
         SizedBox(
           height: 300,
           child: Container(
-            color: Colors.amber,
+            color: Theme.of(context).primaryColor,
             width: 10000,
             child: Column(
               children: [
