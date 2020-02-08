@@ -34,7 +34,7 @@ class RootPage extends StatelessWidget {
               create: (_) => BlackRockStore(portfolio),
             ),
             Provider(
-              create: (_) => InvestmentStore(),
+              create: (_) => InvestmentStore(portfolio),
             ),
           ], child: HomePage());
           return HomePage();
