@@ -47,7 +47,7 @@ class AddGoalPage extends StatelessWidget {
                 color: Colors.white,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Observer(
-                    builder: (_) => TextField(
+                    builder: (_) => TextFormField(
                         style: TextStyle(color: Colors.black),
                         decoration: InputDecoration(
                           labelText: 'Title',
@@ -58,7 +58,7 @@ class AddGoalPage extends StatelessWidget {
                 color: Colors.white,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Observer(
-                    builder: (_) =>(
+                    builder: (_) =>TextFormField(
                         style: TextStyle(color: Colors.black),
                         decoration: InputDecoration(
                           labelText: 'Description',
