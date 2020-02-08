@@ -57,6 +57,7 @@ class BlackRockAPIPortfolio {
   void _addCalculatePerformance(bool value) {
     _baseUrl += _baseUrl.endsWith("?") ? "" : "&";
     _baseUrl += "calculatePerformance=$value";
+    _baseUrl += "includeReturnsMap=$value";
   }
 
   void _addCalculateStressTests(bool value) {
@@ -74,7 +75,7 @@ class BlackRockAPIPortfolio {
     _baseUrl += "calculateExpectedReturns=$value";
   }
 
-  Future<Map<String, dynamic>> _getPortfolios() async {
+  Future<List<dynamic>> _getPortfolios() async {
     var client = http.Client();
     var response = await client.get(_baseUrl);
     var resultMap = json.decode(response.body)["resultMap"];
@@ -82,8 +83,15 @@ class BlackRockAPIPortfolio {
     return resultMap["PORTFOLIOS"][0]["portfolios"];
   }
 
-  Future<Map<String, dynamic>> makeRequest() async {
-    Map<String, dynamic> portfolio = await _getPortfolios();
-    return portfolio;
+  Future<Map<String, dynamic>> getPortfolio() async {
+    List<dynamic> portfolio = await _getPortfolios();
+    return portfolio[0];
   }
+
+  Future<Map<String, dynamic>> getReturnsMap() async {
+    Map<String, dynamic> portfolio = await getPortfolio();
+    return portfolio["returns"]["returnsMap"];
+  }
+
+
 }
