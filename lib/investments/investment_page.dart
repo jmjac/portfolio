@@ -13,52 +13,55 @@ class InvestmentPage extends StatelessWidget {
     investmentStore.calculateChange();
     return Column(
       children: <Widget>[
-        SizedBox(
-          height: 300,
-          child: Container(
-            color: Theme.of(context).primaryColor,
-            width: 10000,
-            child: Column(
-              children: [
-                Observer(
-                  builder: (_) => Padding(
-                      padding: EdgeInsets.only(top: 51.0),
-                      child: Text(
-                          "\$${investmentStore.totalGain.toStringAsFixed(2)}",
-                          style: TextStyle(fontSize: 48))),
-                ),
-                Observer(
-                  builder: (_) => Text(
-                      "\$${investmentStore.monthChange.toStringAsFixed(2)} this month"),
-                ),
-                Padding(
-                    padding: EdgeInsets.only(top: 40.0),
-                    child: SizedBox(
-                        width: 280,
-                        height: 54,
-                        child: FlatButton(
+        Container(
+            decoration: BoxDecoration(boxShadow: [BoxShadow(blurRadius: 10.0)]),
+            child: SizedBox(
+              height: 300,
+              child: Container(
+                color: Theme.of(context).primaryColor,
+                width: 10000,
+                child: Column(
+                  children: [
+                    Observer(
+                      builder: (_) => Padding(
+                          padding: EdgeInsets.only(top: 51.0),
                           child: Text(
-                            "DETAILS",
-                            style: TextStyle(fontSize: 24),
-                          ),
-                          color: Colors.white,
-                          onPressed: () {
-                            Navigator.pushNamed(context, "home/portfolio");
-                          },
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100.0)),
-                        ))),
-                Padding(
-                  padding: EdgeInsets.all(10.0),
+                              "\$${investmentStore.totalGain.toStringAsFixed(2)}",
+                              style: TextStyle(fontSize: 48))),
+                    ),
+                    Observer(
+                      builder: (_) => Text(
+                          "\$${investmentStore.monthChange.toStringAsFixed(2)} this month"),
+                    ),
+                    Padding(
+                        padding: EdgeInsets.only(top: 40.0),
+                        child: SizedBox(
+                            width: 280,
+                            height: 54,
+                            child: FlatButton(
+                              child: Text(
+                                "DETAILS",
+                                style: TextStyle(fontSize: 24),
+                              ),
+                              color: Colors.white,
+                              onPressed: () {
+                                Navigator.pushNamed(context, "home/portfolio");
+                              },
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(100.0)),
+                            ))),
+                    Padding(
+                      padding: EdgeInsets.all(10.0),
+                    ),
+                    Text(
+                      "My Investments",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+                    )
+                  ],
                 ),
-                Text(
-                  "My Investments",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
-                )
-              ],
-            ),
-          ),
-        ),
+              ),
+            )),
         Expanded(
             child: ListView.builder(
           itemBuilder: (context, index) => Column(children: [

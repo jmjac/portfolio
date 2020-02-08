@@ -23,7 +23,7 @@ abstract class _SettingsStore with Store {
 
   //TODO: Make it better so the color don't rely on two variables
   @observable
-  MaterialColor color = Colors.blue;
+  MaterialColor color = Colors.amber;
 
   @action
   void toggleDarkMode() {
@@ -41,7 +41,7 @@ abstract class _SettingsStore with Store {
   @action
   void loadSettings() {
     darkMode = _preferences?.getBool("darkMode") ?? false;
-    colorIndex = _preferences?.getInt("color") ?? 2;
+    colorIndex = _preferences?.getInt("color") ?? Colors.primaries.indexOf(Colors.amber);
     color = colors[colorIndex];
   }
 

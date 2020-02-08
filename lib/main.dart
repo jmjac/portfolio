@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/black_rock/black_rock_page.dart';
+import 'package:portfolio/goals/store/goal_form_store.dart';
 import 'package:portfolio/rootPage.dart';
 import 'package:portfolio/settings/settings_page.dart';
 import 'package:portfolio/settings/store/settings.dart';
@@ -31,7 +32,8 @@ Future<void> main() async {
     Provider(create: (_) => GoalStore(preferences: _preferences)),
     Provider(create: (_) => BlackRockStore(portfolio)),
     Provider(create: (_) => InvestmentStore(portfolio)),
-    Provider(create: (_) => GoalStore(preferences: _preferences))
+    Provider(create: (_) => GoalStore(preferences: _preferences)),
+    Provider(create: (_) => GoalFormStore())
   ], child: MyApp()));
 }
 

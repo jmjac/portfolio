@@ -59,4 +59,21 @@ mixin _$BlackRockStore on _BlackRockStore, Store {
       _$pieChartDataAtom.reportChanged();
     }, _$pieChartDataAtom, name: '${_$pieChartDataAtom.name}_set');
   }
+
+  final _$lineChartDataAtom = Atom(name: '_BlackRockStore.lineChartData');
+
+  @override
+  LineChartData get lineChartData {
+    _$lineChartDataAtom.context.enforceReadPolicy(_$lineChartDataAtom);
+    _$lineChartDataAtom.reportObserved();
+    return super.lineChartData;
+  }
+
+  @override
+  set lineChartData(LineChartData value) {
+    _$lineChartDataAtom.context.conditionallyRunInAction(() {
+      super.lineChartData = value;
+      _$lineChartDataAtom.reportChanged();
+    }, _$lineChartDataAtom, name: '${_$lineChartDataAtom.name}_set');
+  }
 }

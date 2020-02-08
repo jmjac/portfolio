@@ -25,4 +25,26 @@ mixin _$GoalStore on _GoalStore, Store {
       _$goalsAtom.reportChanged();
     }, _$goalsAtom, name: '${_$goalsAtom.name}_set');
   }
+
+  final _$_GoalStoreActionController = ActionController(name: '_GoalStore');
+
+  @override
+  void addGoal(Goal goal) {
+    final _$actionInfo = _$_GoalStoreActionController.startAction();
+    try {
+      return super.addGoal(goal);
+    } finally {
+      _$_GoalStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removeGoal(int index) {
+    final _$actionInfo = _$_GoalStoreActionController.startAction();
+    try {
+      return super.removeGoal(index);
+    } finally {
+      _$_GoalStoreActionController.endAction(_$actionInfo);
+    }
+  }
 }

@@ -118,7 +118,7 @@ class AuthPage extends StatelessWidget {
     return Hero(
       tag: 'logo',
       child: CircleAvatar(
-        child: Text("LOGO"),
+        child: Text("PortfolioGini"),
         minRadius: 100,
       ),
     );
