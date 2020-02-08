@@ -1,0 +1,97 @@
+// **************************************************************************
+// StoreGenerator
+// **************************************************************************
+
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+
+mixin _$AuthenticationStateError on _AuthenticationStateError, Store {
+  Computed<bool> _$hasErrorsComputed;
+
+  @override
+  bool get hasErrors =>
+      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors)).value;
+
+  final _$emailAtom = Atom(name: '_AuthenticationStateError.email');
+
+  @override
+  String get email {
+    _$emailAtom.context.enforceReadPolicy(_$emailAtom);
+    _$emailAtom.reportObserved();
+    return super.email;
+  }
+
+  @override
+  set email(String value) {
+    _$emailAtom.context.conditionallyRunInAction(() {
+      super.email = value;
+      _$emailAtom.reportChanged();
+    }, _$emailAtom, name: '${_$emailAtom.name}_set');
+  }
+
+  final _$passwordAtom = Atom(name: '_AuthenticationStateError.password');
+
+  @override
+  String get password {
+    _$passwordAtom.context.enforceReadPolicy(_$passwordAtom);
+    _$passwordAtom.reportObserved();
+    return super.password;
+  }
+
+  @override
+  set password(String value) {
+    _$passwordAtom.context.conditionallyRunInAction(() {
+      super.password = value;
+      _$passwordAtom.reportChanged();
+    }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
+  }
+
+  final _$passwordRepeatAtom =
+      Atom(name: '_AuthenticationStateError.passwordRepeat');
+
+  @override
+  String get passwordRepeat {
+    _$passwordRepeatAtom.context.enforceReadPolicy(_$passwordRepeatAtom);
+    _$passwordRepeatAtom.reportObserved();
+    return super.passwordRepeat;
+  }
+
+  @override
+  set passwordRepeat(String value) {
+    _$passwordRepeatAtom.context.conditionallyRunInAction(() {
+      super.passwordRepeat = value;
+      _$passwordRepeatAtom.reportChanged();
+    }, _$passwordRepeatAtom, name: '${_$passwordRepeatAtom.name}_set');
+  }
+
+  final _$authenticateAtom =
+      Atom(name: '_AuthenticationStateError.authenticate');
+
+  @override
+  String get authenticate {
+    _$authenticateAtom.context.enforceReadPolicy(_$authenticateAtom);
+    _$authenticateAtom.reportObserved();
+    return super.authenticate;
+  }
+
+  @override
+  set authenticate(String value) {
+    _$authenticateAtom.context.conditionallyRunInAction(() {
+      super.authenticate = value;
+      _$authenticateAtom.reportChanged();
+    }, _$authenticateAtom, name: '${_$authenticateAtom.name}_set');
+  }
+
+  final _$_AuthenticationStateErrorActionController =
+      ActionController(name: '_AuthenticationStateError');
+
+  @override
+  void clear() {
+    final _$actionInfo =
+        _$_AuthenticationStateErrorActionController.startAction();
+    try {
+      return super.clear();
+    } finally {
+      _$_AuthenticationStateErrorActionController.endAction(_$actionInfo);
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+    "investment": [
+		{"name": "State Street Global Advisors (SSGA)",
+		"desc": "Designed to track the S&P 500 stock market index, this fund is the largest ETF in the world",
+		"ticker": "SPY",
+		"beginDate": 1420088400,
+		"quantity": 2,
+		"investment": 664.4,
+		"correspondingGoal": "New Laptop",
+		"riskLevel": "Low Risk"
+		}
+		{"name": "Apple",
+			"desc": "Apple designs, develops, and sells consumer electronics, computer software, and online services. It is considered one of the Big Four technology companies, along with Amazon, Google, and Facebook",
+			"ticker": "AAPL",
+			"beginDate": 1420088400,
+			"quantity": 3,
+			"investment": 960.09,
+			"correspondingGoal": "New Laptop",
+			"riskLevel": "High Risk"
+			}
+	]
+}

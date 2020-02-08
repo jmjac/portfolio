@@ -1,0 +1,10 @@
+{
+    "goal": {
+        "name": "New Laptop",
+		"beginDate": 1420088400,
+		"endDate": 1641013200,
+		"price": 1000,
+		"riskLevel": "High Risk",
+		"color": "blue"
+    }
+}
