@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:portfolio/black_rock/black_rock_api.dart';
 import 'package:provider/provider.dart';
 
 import 'authentication/auth_page.dart';
@@ -24,7 +25,6 @@ class RootPage extends StatelessWidget {
           //Disposes of the reactions and clear errors
           authentication.disposeReactions();
           authentication.error.clear();
-
           return HomePage();
           break;
         default:
