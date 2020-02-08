@@ -11,18 +11,26 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'authentication/auth.dart';
 import 'authentication/base_auth.dart';
 import 'authentication/store/authentication.dart';
+import 'black_rock/black_rock_api_portfolio.dart';
+import 'black_rock/store/black_rock.dart';
 import 'goals/store/goalStore.dart';
 import 'home_page.dart';
+import 'investments/store/investment_store.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final BaseAuth _auth = Auth();
   final SharedPreferences _preferences = await SharedPreferences.getInstance();
 
+  BlackRockAPIPortfolio portfolio =
+      BlackRockAPIPortfolio(positions: {"AOGIX": 66.23, "SSBTX": 33.77});
+
   runApp(MultiProvider(providers: [
     Provider(create: (_) => AuthenticationStore(auth: _auth)),
     Provider(create: (_) => SettingsStore(preferences: _preferences)),
-    Provider(create: (_) => GoalStore(preferences: _preferences))
+    Provider(create: (_) => GoalStore(preferences: _preferences)),
+    Provider(create: (_) => BlackRockStore(portfolio)),
+    Provider(create: (_) => InvestmentStore(portfolio)),
   ], child: MyApp()));
 }
 

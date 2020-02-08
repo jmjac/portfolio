@@ -27,16 +27,7 @@ class RootPage extends StatelessWidget {
           //Disposes of the reactions and clear errors
           authentication.disposeReactions();
           authentication.error.clear();
-          BlackRockAPIPortfolio portfolio = BlackRockAPIPortfolio(
-              positions: {"AOGIX": 66.23, "SSBTX": 33.77});
-          return MultiProvider(providers: [
-            Provider(
-              create: (_) => BlackRockStore(portfolio),
-            ),
-            Provider(
-              create: (_) => InvestmentStore(portfolio),
-            ),
-          ], child: HomePage());
+          return HomePage();
           return HomePage();
           break;
         default:
