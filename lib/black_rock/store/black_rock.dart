@@ -51,15 +51,15 @@ abstract class _BlackRockStore with Store {
 
   void loadPieChartData() {
     List<PieChartHolding> data = [];
-    for (String name in portfolio.positions.keys) {
-      data.add(PieChartHolding(name, portfolio.positions[name]));
+    for (String name in portfolio.positionsMap.keys) {
+      data.add(PieChartHolding(name, portfolio.positionsMap[name]));
     }
     pieChartData = [
       Charts.Series<PieChartHolding, String>(
           id: "Holdings",
           data: data,
           colorFn: (_, i) => Charts.ColorUtil.fromDartColor(Colors.yellow[
-              i != null ? (i + (10 - portfolio.positions.length)) * 100 : 250]),
+              i != null ? (i + (10 - portfolio.positionsMap.length)) * 100 : 250]),
           domainFn: (PieChartHolding holding, _) => holding.name,
           measureFn: (PieChartHolding holding, _) => holding.value)
     ];

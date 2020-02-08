@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:portfolio/black_rock/black_rock_api_portfolio.dart';
+import 'package:portfolio/black_rock/store/black_rock.dart';
+import 'package:portfolio/investments/store/investment_store.dart';
 import 'package:provider/provider.dart';
 
 import 'authentication/auth_page.dart';
@@ -25,6 +27,10 @@ class RootPage extends StatelessWidget {
           //Disposes of the reactions and clear errors
           authentication.disposeReactions();
           authentication.error.clear();
+          return MultiProvider(providers: [
+            Provider(create: (_) => BlackRockStore(),),
+            Provider(create: (_) => InvestmentStore(),),
+          ], child: HomePage());
           return HomePage();
           break;
         default:

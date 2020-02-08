@@ -7,7 +7,8 @@ class BlackRockAPIPortfolio {
   String _baseUrl =
       "https://www.blackrock.com/tools/hackathon/portfolio-analysis?";
 
-  Map<String, double> positions;
+  Map<String, double> positionsMap;
+  List<String> positionsNames;
   bool calculateExposures;
   bool calculatePerformance;
   bool calculateStressTests;
@@ -21,12 +22,13 @@ class BlackRockAPIPortfolio {
       bool calculateStressTests,
       bool calculateRisk,
       bool calculateExpectedReturns}) {
-    this.positions = positions;
+    this.positionsMap = positions;
     this.calculatePerformance = calculatePerformance;
     this.calculateExposures = calculateExposures;
     this.calculateExpectedReturns = calculateExpectedReturns;
     this.calculateRisk = calculateRisk;
     this.calculateStressTests = calculateStressTests;
+    _buildBaseUrl();
   }
 
   void _buildBaseUrl() {
@@ -50,20 +52,23 @@ class BlackRockAPIPortfolio {
       _addCalculateExpectedReturns(calculateExpectedReturns);
     }
 
-    if (positions != null) {
-      _baseUrl += _addPositionsParameted(positions);
-      this.positions = positions;
+    if (positionsMap != null) {
+      _baseUrl += _addPositionsParameted(positionsMap);
+      this.positionsMap = positionsMap;
     }
   }
 
   void changePositions(Map<String, double> positions) {
-    this.positions = positions;
+    this.positionsMap = positions;
+    _buildBaseUrl();
   }
 
   //Converts the list of positions to tags working for the api request
   String _addPositionsParameted(Map<String, double> positions) {
     String positionsParameter = "&positions=";
+    positionsNames = [];
     for (String position in positions.keys) {
+      positionsNames.add(position);
       positionsParameter += "$position~${positions[position]}%7C";
     }
     return positionsParameter;
