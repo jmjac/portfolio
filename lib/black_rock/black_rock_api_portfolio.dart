@@ -145,7 +145,7 @@ class BlackRockAPIPortfolio {
     return portfolio["returns"]["returnsMap"];
   }
 
-  Future<Map<String, dynamic>> getPerfChart() async {
+  Future<List<dynamic>> getPerfChart() async {
     Map<String, dynamic> portfolio = await getPortfolio();
     return portfolio["returns"]["performanceChart"];
   }

@@ -89,34 +89,15 @@ abstract class _BlackRockStore with Store {
     ];
 
   void mainData() async {
-    Map<String, dynamic> returnsMap = await portfolio.getPerfChart();
-    List<DataPoint> data = [];
-    for (String date in returnsMap.keys) {
-      data.add(DataPoint(
-          int.parse(date), returnsMap[date]["level"] * initialInvestment));
+    List<dynamic> returnsMap = await portfolio.getPerfChart();
+    List<FlSpot> perfChartData = [];
+    for (List<dynamic> pair in returnsMap) {
+      perfChartData.add(FlSpot(
+          pair[0].toDouble(), pair[1] * initialInvestment));
     }
-    data.removeLast();
-    seriesPerMonth = [
-      Charts.Series<DataPoint, DateTime>(
-        id: 'Sales',
-        colorFn: (_, __) => Charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (DataPoint point, _) =>
-            DateTime.fromMicrosecondsSinceEpoch(point.data),
-        measureFn: (DataPoint point, _) => point.value,
-        data: data,
-      )
-    ];
 
     LineChartBarData liveData = LineChartBarData(
-          spots: const [
-            FlSpot(0, 3),
-            FlSpot(2.6, 2),
-            FlSpot(4.9, 5),
-            FlSpot(6.8, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 3),
-            FlSpot(11, 4),
-          ],
+          spots: perfChartData,
           isCurved: true,
           colors: gradientColors,
           barWidth: 5,
@@ -126,7 +107,7 @@ abstract class _BlackRockStore with Store {
           ),
           belowBarData: BarAreaData(
             show: true,
-            colors: gradientColors.map((color) => color.withOpacity(0.3)).toList(),
+            colors: gradientColors.map((color) => color.withOpacity(0.7)).toList(),
           ),
         );
     
