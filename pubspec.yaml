@@ -45,6 +45,9 @@ dependencies:
   #Fonts
   google_fonts: ^0.3.7
 
+  # For goals circles
+  percent_indicator: ^2.1.1+1
+
 
 dev_dependencies:
   flutter_test:
