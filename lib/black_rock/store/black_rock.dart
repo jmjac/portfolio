@@ -3,6 +3,7 @@ import 'package:mobx/mobx.dart';
 import 'package:portfolio/black_rock/black_rock_api_performence.dart';
 import 'package:portfolio/black_rock/black_rock_api_portfolio.dart';
 import 'package:charts_flutter/flutter.dart' as Charts;
+import 'package:fl_chart/fl_chart.dart';
 
 part 'black_rock.g.dart';
 
@@ -23,6 +24,8 @@ abstract class _BlackRockStore with Store {
   BlackRockAPIPerformance performance;
 
   double initialInvestment = 10000.0;
+
+
 
   @observable
   double monthChange = 0;
@@ -88,3 +91,101 @@ class DataPoint {
 
   DataPoint(this.data, this.value);
 }
+
+LineChartData mainData() {
+    List<Color> gradientColors = [
+    Colors.amber,
+    Colors.white,
+    ];
+    return LineChartData(
+      gridData: FlGridData(
+        show: true,
+        drawVerticalLine: true,
+        getDrawingHorizontalLine: (value) {
+          return const FlLine(
+            color: Color(0xff37434d),
+            strokeWidth: 1,
+          );
+        },
+        getDrawingVerticalLine: (value) {
+          return const FlLine(
+            color: Color(0xff37434d),
+            strokeWidth: 1,
+          );
+        },
+      ),
+      titlesData: FlTitlesData(
+        show: true,
+        bottomTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 22,
+          textStyle:
+              TextStyle(color: const Color(0xff68737d), fontWeight: FontWeight.bold, fontSize: 16),
+          getTitles: (value) {
+            switch (value.toInt()) {
+              case 2:
+                return 'MAR';
+              case 5:
+                return 'JUN';
+              case 8:
+                return 'SEP';
+            }
+            return '';
+          },
+          margin: 8,
+        ),
+        leftTitles: SideTitles(
+          showTitles: true,
+          textStyle: TextStyle(
+            color: const Color(0xff67727d),
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+          ),
+          getTitles: (value) {
+            switch (value.toInt()) {
+              case 1:
+                return '10k';
+              case 3:
+                return '30k';
+              case 5:
+                return '50k';
+            }
+            return '';
+          },
+          reservedSize: 28,
+          margin: 12,
+        ),
+      ),
+      borderData:
+          FlBorderData(show: true, border: Border.all(color: const Color(0xff37434d), width: 1)),
+      minX: 0,
+      maxX: 11,
+      minY: 0,
+      maxY: 6,
+      lineBarsData: [
+        LineChartBarData(
+          spots: const [
+            FlSpot(0, 3),
+            FlSpot(2.6, 2),
+            FlSpot(4.9, 5),
+            FlSpot(6.8, 3.1),
+            FlSpot(8, 4),
+            FlSpot(9.5, 3),
+            FlSpot(11, 4),
+          ],
+          isCurved: true,
+          colors: gradientColors,
+          barWidth: 5,
+          isStrokeCapRound: true,
+          dotData: const FlDotData(
+            show: false,
+          ),
+          belowBarData: BarAreaData(
+            show: true,
+            colors: gradientColors.map((color) => color.withOpacity(0.3)).toList(),
+          ),
+        ),
+      ],
+    );
+  }
+

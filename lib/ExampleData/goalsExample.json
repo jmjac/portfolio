@@ -6,6 +6,7 @@
 		"price": 1000,
 		"contributed": 200,
 		"riskLevel": "High Risk",
+		"stonks": ["PMADX", "PBEAX", "SUWBX", "CATNX"],
 		"color": "blue"
     }
 }

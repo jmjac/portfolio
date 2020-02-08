@@ -5,6 +5,7 @@ import 'package:portfolio/black_rock/store/black_rock.dart';
 import 'package:charts_flutter/flutter.dart' as Charts;
 import 'package:portfolio/settings/store/settings.dart';
 import 'package:provider/provider.dart';
+import 'package:fl_chart/fl_chart.dart' as flCharts;
 
 class BlackRockPage extends StatelessWidget {
   @override
@@ -35,6 +36,19 @@ class BlackRockPage extends StatelessWidget {
                   defaultRenderer: Charts.ArcRendererConfig(
                       arcWidth: 60,
                       arcRendererDecorators: [Charts.ArcLabelDecorator()]))),
+        ),
+        Container(
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(18),
+                ),
+                color: const Color(0xff232d37)),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 18.0, left: 12.0, top: 24, bottom: 12),
+              child: flCharts.LineChart(
+                mainData(),
+              ),
+            ),
         )
       ])),
     );

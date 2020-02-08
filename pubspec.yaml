@@ -41,6 +41,7 @@ dependencies:
 
   # Graphs
   charts_flutter: ^0.8.1
+  fl_chart: ^0.8.1
 
   #Fonts
   google_fonts: ^0.3.7
