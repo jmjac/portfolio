@@ -25,4 +25,21 @@ mixin _$InvestmentStore on _InvestmentStore, Store {
       _$totalGainAtom.reportChanged();
     }, _$totalGainAtom, name: '${_$totalGainAtom.name}_set');
   }
+
+  final _$monthChangeAtom = Atom(name: '_InvestmentStore.monthChange');
+
+  @override
+  double get monthChange {
+    _$monthChangeAtom.context.enforceReadPolicy(_$monthChangeAtom);
+    _$monthChangeAtom.reportObserved();
+    return super.monthChange;
+  }
+
+  @override
+  set monthChange(double value) {
+    _$monthChangeAtom.context.conditionallyRunInAction(() {
+      super.monthChange = value;
+      _$monthChangeAtom.reportChanged();
+    }, _$monthChangeAtom, name: '${_$monthChangeAtom.name}_set');
+  }
 }

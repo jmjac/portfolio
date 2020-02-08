@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:portfolio/black_rock/store/black_rock.dart';
 import 'package:charts_flutter/flutter.dart' as Charts;
+import 'package:provider/provider.dart';
 
 class BlackRockPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final BlackRockStore blackRockStore = BlackRockStore();
+    final BlackRockStore blackRockStore = Provider.of<BlackRockStore>(context);
     blackRockStore.loadLinearGraphData();
     blackRockStore.loadPieChartData();
 

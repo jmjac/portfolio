@@ -9,6 +9,23 @@ part of 'black_rock.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$BlackRockStore on _BlackRockStore, Store {
+  final _$monthChangeAtom = Atom(name: '_BlackRockStore.monthChange');
+
+  @override
+  double get monthChange {
+    _$monthChangeAtom.context.enforceReadPolicy(_$monthChangeAtom);
+    _$monthChangeAtom.reportObserved();
+    return super.monthChange;
+  }
+
+  @override
+  set monthChange(double value) {
+    _$monthChangeAtom.context.conditionallyRunInAction(() {
+      super.monthChange = value;
+      _$monthChangeAtom.reportChanged();
+    }, _$monthChangeAtom, name: '${_$monthChangeAtom.name}_set');
+  }
+
   final _$seriesPerMonthAtom = Atom(name: '_BlackRockStore.seriesPerMonth');
 
   @override

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/black_rock/black_rock_page.dart';
 import 'package:portfolio/rootPage.dart';
 import 'package:portfolio/settings/settings_page.dart';
 import 'package:portfolio/settings/store/settings.dart';
@@ -32,6 +34,7 @@ class MyApp extends StatelessWidget {
 
     return Observer(builder: (_) {
       ThemeData appTheme = ThemeData(
+          textTheme: GoogleFonts.robotoTextTheme(),
           primarySwatch: settings.color,
           brightness: settings.darkMode ? Brightness.dark : Brightness.light);
 
@@ -42,7 +45,8 @@ class MyApp extends StatelessWidget {
         routes: {
           "": (context) => RootPage(),
           "home": (context) => HomePage(),
-          "home/settings": (context) => SettingsPage()
+          "home/settings": (context) => SettingsPage(),
+          "home/portfolio": (context) => BlackRockPage(),
         },
         home: RootPage(),
       );
