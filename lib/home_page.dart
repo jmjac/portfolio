@@ -25,10 +25,7 @@ class HomePage extends StatelessWidget {
           Text("Welcome ${authentication.email}"),
           RaisedButton(
             onPressed: () {
-              BlackRockAPI api = BlackRockAPI(
-                  isAnalysis: true,
-                  positions: {"PDMAX": 24.38, "CATNX": 3.49});
-              api.makeRequest();
+
             },
             child: Text("Make api request"),
           )
