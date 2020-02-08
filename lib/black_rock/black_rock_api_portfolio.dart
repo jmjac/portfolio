@@ -4,11 +4,15 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 
 class BlackRockAPIPortfolio {
-  String requestUrl;
   String _baseUrl =
       "https://www.blackrock.com/tools/hackathon/portfolio-analysis?";
 
   Map<String, double> positions;
+  bool calculateExposures;
+  bool calculatePerformance;
+  bool calculateStressTests;
+  bool calculateRisk;
+  bool calculateExpectedReturns;
 
   BlackRockAPIPortfolio(
       {Map<String, double> positions,
@@ -17,6 +21,15 @@ class BlackRockAPIPortfolio {
       bool calculateStressTests,
       bool calculateRisk,
       bool calculateExpectedReturns}) {
+    this.positions = positions;
+    this.calculatePerformance = calculatePerformance;
+    this.calculateExposures = calculateExposures;
+    this.calculateExpectedReturns = calculateExpectedReturns;
+    this.calculateRisk = calculateRisk;
+    this.calculateStressTests = calculateStressTests;
+  }
+
+  void _buildBaseUrl() {
     if (calculateExposures != null) {
       _addCalculateExposures(calculateExposures);
     }
@@ -41,6 +54,10 @@ class BlackRockAPIPortfolio {
       _baseUrl += _addPositionsParameted(positions);
       this.positions = positions;
     }
+  }
+
+  void changePositions(Map<String, double> positions) {
+    this.positions = positions;
   }
 
   //Converts the list of positions to tags working for the api request
@@ -79,6 +96,7 @@ class BlackRockAPIPortfolio {
   }
 
   Future<List<dynamic>> _getPortfolios() async {
+    _buildBaseUrl();
     var client = http.Client();
     var response = await client.get(_baseUrl);
     var resultMap = json.decode(response.body)["resultMap"];

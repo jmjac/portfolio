@@ -1,121 +1,73 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:portfolio/black_rock/black_rock_page.dart';
+import 'package:portfolio/settings/settings_page.dart';
 import 'package:provider/provider.dart';
-
 import 'authentication/store/authentication.dart';
 import 'black_rock/black_rock_api_portfolio.dart';
 import 'goals/store/goalStore.dart';
 
 class HomePage extends StatelessWidget {
-    static const kIcons = <Icon>[
-    Icon(Icons.event),
-    Icon(Icons.home),
-    Icon(Icons.android),
-    Icon(Icons.alarm),
-    Icon(Icons.face),
-    Icon(Icons.language),
+  final pages = <StatelessWidget>[
+    BlackRockPage(),
+    BlackRockPage(),
+    BlackRockPage()
   ];
+
   @override
   Widget build(BuildContext context) {
     final AuthenticationStore authentication =
         Provider.of<AuthenticationStore>(context);
-    final GoalStore goal =
-        Provider.of<GoalStore>(context);
+    final GoalStore goal = Provider.of<GoalStore>(context);
+
     return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              Navigator.pushNamed(context, "home/settings");
-            },
-          ),
-        ],
-      ),
-      
-      body: DefaultTabController(
-      length: kIcons.length,
-      // Use a Builder here, otherwise `DefaultTabController.of(context)` below
-      // returns null.
-      child: Builder(
-        builder: (BuildContext context) => Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: <Widget>[
-              TabPageSelector(),
-              Expanded(
-                child: IconTheme(
-                  data: IconThemeData(
-                    size: 128.0,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  child: TabBarView(children: kIcons),
-                ),
-              ),
-              RaisedButton(
-                child: Text('SKIP'),
-                onPressed: () {
-                  final TabController controller =
-                      DefaultTabController.of(context);
-                  if (!controller.indexIsChanging) {
-                    controller.animateTo(kIcons.length - 1);
-                  }
-                },
-              )
-            ],
-          ),
+        appBar: AppBar(
+          title: Text("PortfoliQ"),
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: () {
+                Navigator.pushNamed(context, "home/settings");
+              },
+            ),
+          ],
         ),
-      ),
-    )
-      // Center(
-      //   child: Column(children: <Widget>[
-      //     Text("Welcome ${authentication.email}"),
-      //     RaisedButton(
-      //       onPressed: () {
+        body: DefaultTabController(
+          length: pages.length,
+          child: Builder(
+            builder: (BuildContext context) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: IconTheme(
+                      data: IconThemeData(
+                        size: 128.0,
+                        color: Theme.of(context).accentColor,
+                      ),
+                      child: TabBarView(children: pages),
+                    ),
+                  ),
+                  TabPageSelector(
+                    indicatorSize: 8.0,
+                    color: Colors.grey,
+                    selectedColor: Colors.black,
 
-      //       },
-      //       child: Text("Make api request"),
-      //     ),
-      //     // addGoal(goal)
-      //   ]),
-      //   //Observer(builder: (_)=>ListView.builder(itemBuilder: null, itemCount: 0,))
-      // ),
-    );
+                  ),
+//                  RaisedButton(
+//                    child: Text('SKIP'),
+//                    onPressed: () {
+//                      final TabController controller =
+//                          DefaultTabController.of(context);
+//                      if (!controller.indexIsChanging) {
+//                        controller.animateTo(pages.length - 1);
+//                      }
+//                    },
+//                  )
+                ],
+              ),
+            ),
+          ),
+        ));
   }
-
-  // Widget addGoal(GoalStore goal, BuildContext context) {
-  //   return RaisedButton(
-  //       shape: RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.circular(100),
-  //       ),
-  //       color: Colors.red,
-  //       textColor: Colors.white,
-  //       elevation: 16,
-  //       padding: EdgeInsets.all(4.0),
-  //       child: Row(
-  //         mainAxisAlignment: MainAxisAlignment.center,
-  //         children: <Widget>[
-  //           Padding(
-  //               padding: EdgeInsets.only(left: 8.0),
-  //               child: Text("Set Goal"))
-  //         ],
-  //       )
-        // onPressed:
-  // }
-
-
-  // _addGoal() {
-  //    showDialog(
-  //      context: context,
-  //      builder: (BuildContext context) {
-  //        return AlertDialog(
-  //          title: Text('New todo'),
-  //        );
-  //      },
-  //    );
-  //  }
-
-
-
 }

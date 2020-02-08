@@ -14,18 +14,19 @@ class BlackRockPage extends StatelessWidget {
     return Scaffold(
       body: Center(
           child: Column(children: [
+        Text("Portfolio"),
+//        SizedBox(
+//          height: 200,
+//          width: 200,
+//          child: Observer(
+//              builder: (_) => Charts.TimeSeriesChart(
+//                    blackRockStore.seriesPerMonth,
+//                    animate: true,
+//                  )),
+//        ),
         SizedBox(
-          height: 200,
-          width: 200,
-          child: Observer(
-              builder: (_) => Charts.TimeSeriesChart(
-                    blackRockStore.seriesPerMonth,
-                    animate: true,
-                  )),
-        ),
-        SizedBox(
-          height: 300,
-          width: 300,
+          height: 250,
+          width: 250,
           child: Observer(
               builder: (_) => Charts.PieChart(blackRockStore.pieChartData,
                   animate: true,
