@@ -39,8 +39,9 @@ dependencies:
   # Material Color picker to choose theme
   flutter_material_color_picker: ^1.0.5
 
-  #chopper for api
-  chopper: any
+  # Graphs
+  charts_flutter: ^0.8.1
+
 
 dev_dependencies:
   flutter_test:
@@ -50,8 +51,6 @@ dev_dependencies:
   # State management mobx
   mobx_codegen: ^0.4.1+2
 
-  #chopper for api
-  chopper_generator: any
 
 
 

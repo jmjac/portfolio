@@ -8,6 +8,8 @@ class BlackRockAPIPortfolio {
   String _baseUrl =
       "https://www.blackrock.com/tools/hackathon/portfolio-analysis?";
 
+  Map<String, double> positions;
+
   BlackRockAPIPortfolio(
       {Map<String, double> positions,
       bool calculateExposures,
@@ -37,6 +39,7 @@ class BlackRockAPIPortfolio {
 
     if (positions != null) {
       _baseUrl += _addPositionsParameted(positions);
+      this.positions = positions;
     }
   }
 
@@ -92,6 +95,4 @@ class BlackRockAPIPortfolio {
     Map<String, dynamic> portfolio = await getPortfolio();
     return portfolio["returns"]["returnsMap"];
   }
-
-
 }

@@ -9,20 +9,37 @@ part of 'black_rock.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$BlackRockStore on _BlackRockStore, Store {
-  final _$scoreAtom = Atom(name: '_BlackRockStore.score');
+  final _$seriesPerMonthAtom = Atom(name: '_BlackRockStore.seriesPerMonth');
 
   @override
-  int get score {
-    _$scoreAtom.context.enforceReadPolicy(_$scoreAtom);
-    _$scoreAtom.reportObserved();
-    return super.score;
+  List<Charts.Series<DataPoint, DateTime>> get seriesPerMonth {
+    _$seriesPerMonthAtom.context.enforceReadPolicy(_$seriesPerMonthAtom);
+    _$seriesPerMonthAtom.reportObserved();
+    return super.seriesPerMonth;
   }
 
   @override
-  set score(int value) {
-    _$scoreAtom.context.conditionallyRunInAction(() {
-      super.score = value;
-      _$scoreAtom.reportChanged();
-    }, _$scoreAtom, name: '${_$scoreAtom.name}_set');
+  set seriesPerMonth(List<Charts.Series<DataPoint, DateTime>> value) {
+    _$seriesPerMonthAtom.context.conditionallyRunInAction(() {
+      super.seriesPerMonth = value;
+      _$seriesPerMonthAtom.reportChanged();
+    }, _$seriesPerMonthAtom, name: '${_$seriesPerMonthAtom.name}_set');
+  }
+
+  final _$pieChartDataAtom = Atom(name: '_BlackRockStore.pieChartData');
+
+  @override
+  List<Charts.Series<PieChartHolding, String>> get pieChartData {
+    _$pieChartDataAtom.context.enforceReadPolicy(_$pieChartDataAtom);
+    _$pieChartDataAtom.reportObserved();
+    return super.pieChartData;
+  }
+
+  @override
+  set pieChartData(List<Charts.Series<PieChartHolding, String>> value) {
+    _$pieChartDataAtom.context.conditionallyRunInAction(() {
+      super.pieChartData = value;
+      _$pieChartDataAtom.reportChanged();
+    }, _$pieChartDataAtom, name: '${_$pieChartDataAtom.name}_set');
   }
 }
