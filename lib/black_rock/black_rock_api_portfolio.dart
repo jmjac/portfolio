@@ -9,35 +9,36 @@ class BlackRockAPIPortfolio {
 
   Map<String, double> positionsMap;
   List<String> positionsNames;
-  int startDate;
   bool calculateExposures;
   bool calculatePerformance;
   bool calculateStressTests;
   bool calculateRisk;
   bool calculateExpectedReturns;
+  bool onlyMonthEndPerfChart;
+  int startDate;
+
 
   BlackRockAPIPortfolio(
       {Map<String, double> positions,
-      int startDate,
       bool calculateExposures,
       bool calculatePerformance,
       bool calculateStressTests,
       bool calculateRisk,
-      bool calculateExpectedReturns}) {
+      bool calculateExpectedReturns,
+      bool onlyMonthEndPerfChart,
+      int startDate}) {
     this.positionsMap = positions;
-    this.startDate = startDate;
     this.calculatePerformance = calculatePerformance;
     this.calculateExposures = calculateExposures;
     this.calculateExpectedReturns = calculateExpectedReturns;
     this.calculateRisk = calculateRisk;
     this.calculateStressTests = calculateStressTests;
+    this.startDate = startDate;
+    this.onlyMonthEndPerfChart = onlyMonthEndPerfChart;
     _buildBaseUrl();
   }
 
   void _buildBaseUrl() {
-    if (startDate != null) {
-      _addStartDate(startDate);
-    }
     if (calculateExposures != null) {
       _addCalculateExposures(calculateExposures);
     }
@@ -58,10 +59,19 @@ class BlackRockAPIPortfolio {
       _addCalculateExpectedReturns(calculateExpectedReturns);
     }
 
+    if (onlyMonthEndPerfChart != null) {
+      _addOnlyMonthEndPerfChart(onlyMonthEndPerfChart);
+    }
+
+    if (startDate != null) {
+      _addStartDate(startDate);
+    }
+
     if (positionsMap != null) {
       _baseUrl += _addPositionsParameted(positionsMap);
       this.positionsMap = positionsMap;
     }
+
   }
 
   void changePositions(Map<String, double> positions) {
@@ -78,11 +88,6 @@ class BlackRockAPIPortfolio {
       positionsParameter += "$position~${positions[position]}%7C";
     }
     return positionsParameter;
-  }
-
-  void _addStartDate(int value) {
-    _baseUrl += _baseUrl.endsWith("?") ? "" : "&";
-    _baseUrl += "&startDate=$value";
   }
 
   void _addCalculateExposures(bool value) {
@@ -111,6 +116,16 @@ class BlackRockAPIPortfolio {
     _baseUrl += "calculateExpectedReturns=$value";
   }
 
+  void _addOnlyMonthEndPerfChart(bool value) {
+    _baseUrl += _baseUrl.endsWith("?") ? "" : "&";
+    _baseUrl += "onlyMonthEndPerfChart=$value";
+  }
+
+    void _addStartDate(int value) {
+    _baseUrl += _baseUrl.endsWith("?") ? "" : "&";
+    _baseUrl += "startDate=$value";
+  }
+
   Future<List<dynamic>> _getPortfolios() async {
     _buildBaseUrl();
     var client = http.Client();
@@ -129,4 +144,11 @@ class BlackRockAPIPortfolio {
     Map<String, dynamic> portfolio = await getPortfolio();
     return portfolio["returns"]["returnsMap"];
   }
+
+  Future<Map<String, dynamic>> getPerfChart() async {
+    Map<String, dynamic> portfolio = await getPortfolio();
+    return portfolio["returns"]["performanceChart"];
+  }
+
+
 }

@@ -13,6 +13,7 @@ class BlackRockPage extends StatelessWidget {
     final BlackRockStore blackRockStore = Provider.of<BlackRockStore>(context);
     blackRockStore.loadLinearGraphData();
     blackRockStore.loadPieChartData();
+    blackRockStore.mainData();
 
     return Scaffold(
       body: Center(
@@ -42,11 +43,11 @@ class BlackRockPage extends StatelessWidget {
                 borderRadius: const BorderRadius.all(
                   Radius.circular(18),
                 ),
-                color: const Color(0xff232d37)),
+                color: Colors.white),
             child: Padding(
               padding: const EdgeInsets.only(right: 18.0, left: 12.0, top: 24, bottom: 12),
               child: flCharts.LineChart(
-                mainData(),
+                blackRockStore.lineChartData,
               ),
             ),
         )

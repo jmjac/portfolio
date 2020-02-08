@@ -20,7 +20,10 @@ abstract class _BlackRockStore with Store {
     "SUWBX": 44.76,
     "CATNX": 300.49,
     "AAPL": 100.00,
-  });
+  }, startDate: 20190101,
+  calculatePerformance: true,
+  onlyMonthEndPerfChart: true
+  );
   BlackRockAPIPerformance performance;
 
   double initialInvestment = 10000.0;
@@ -35,6 +38,9 @@ abstract class _BlackRockStore with Store {
 
   @observable
   List<Charts.Series<PieChartHolding, String>> pieChartData = [];
+
+  @observable
+  LineChartData lineChartData;
 
   // Uses level from resultsMap to calculate the portfolio performance per month
   // and convert it to LineSeries to feed to graph
@@ -76,40 +82,67 @@ abstract class _BlackRockStore with Store {
           measureFn: (PieChartHolding holding, _) => holding.value)
     ];
   }
-}
 
-class PieChartHolding {
-  String name;
-  double value;
-
-  PieChartHolding(this.name, this.value);
-}
-
-class DataPoint {
-  int data;
-  double value;
-
-  DataPoint(this.data, this.value);
-}
-
-LineChartData mainData() {
     List<Color> gradientColors = [
+    Colors.amber[700],
     Colors.amber,
-    Colors.white,
     ];
-    return LineChartData(
+
+  void mainData() async {
+    Map<String, dynamic> returnsMap = await portfolio.getPerfChart();
+    List<DataPoint> data = [];
+    for (String date in returnsMap.keys) {
+      data.add(DataPoint(
+          int.parse(date), returnsMap[date]["level"] * initialInvestment));
+    }
+    data.removeLast();
+    seriesPerMonth = [
+      Charts.Series<DataPoint, DateTime>(
+        id: 'Sales',
+        colorFn: (_, __) => Charts.MaterialPalette.blue.shadeDefault,
+        domainFn: (DataPoint point, _) =>
+            DateTime.fromMicrosecondsSinceEpoch(point.data),
+        measureFn: (DataPoint point, _) => point.value,
+        data: data,
+      )
+    ];
+
+    LineChartBarData liveData = LineChartBarData(
+          spots: const [
+            FlSpot(0, 3),
+            FlSpot(2.6, 2),
+            FlSpot(4.9, 5),
+            FlSpot(6.8, 3.1),
+            FlSpot(8, 4),
+            FlSpot(9.5, 3),
+            FlSpot(11, 4),
+          ],
+          isCurved: true,
+          colors: gradientColors,
+          barWidth: 5,
+          isStrokeCapRound: true,
+          dotData: const FlDotData(
+            show: false,
+          ),
+          belowBarData: BarAreaData(
+            show: true,
+            colors: gradientColors.map((color) => color.withOpacity(0.3)).toList(),
+          ),
+        );
+    
+    lineChartData = LineChartData(
       gridData: FlGridData(
         show: true,
         drawVerticalLine: true,
         getDrawingHorizontalLine: (value) {
           return const FlLine(
-            color: Color(0xff37434d),
+            color: Colors.red,
             strokeWidth: 1,
           );
         },
         getDrawingVerticalLine: (value) {
           return const FlLine(
-            color: Color(0xff37434d),
+            color: Colors.red,
             strokeWidth: 1,
           );
         },
@@ -163,29 +196,25 @@ LineChartData mainData() {
       minY: 0,
       maxY: 6,
       lineBarsData: [
-        LineChartBarData(
-          spots: const [
-            FlSpot(0, 3),
-            FlSpot(2.6, 2),
-            FlSpot(4.9, 5),
-            FlSpot(6.8, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 3),
-            FlSpot(11, 4),
-          ],
-          isCurved: true,
-          colors: gradientColors,
-          barWidth: 5,
-          isStrokeCapRound: true,
-          dotData: const FlDotData(
-            show: false,
-          ),
-          belowBarData: BarAreaData(
-            show: true,
-            colors: gradientColors.map((color) => color.withOpacity(0.3)).toList(),
-          ),
-        ),
+        liveData
       ],
     );
   }
+
+}
+
+class PieChartHolding {
+  String name;
+  double value;
+
+  PieChartHolding(this.name, this.value);
+}
+
+class DataPoint {
+  int data;
+  double value;
+
+  DataPoint(this.data, this.value);
+}
+
 
