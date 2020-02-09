@@ -29,6 +29,24 @@ abstract class _BlackRockStore with Store {
   BlackRockAPIPerformance performance;
 
   double initialInvestment = 1000.0;
+  
+  final months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ];
+
+  @observable
+  double profit = 0;
 
   @observable
   double monthChange = 0;
@@ -70,6 +88,7 @@ abstract class _BlackRockStore with Store {
     List<dynamic> perfChart = await portfolio.getPerfChart();
     List<FlSpot> perfChartData = [];
     int initialYear = DateTime.fromMillisecondsSinceEpoch(perfChart[0][0], isUtc: true).year;
+    profit = double.parse(((perfChart[perfChart.length - 1][1] - 1) * initialInvestment).toStringAsFixed(2));
 
     for (List<dynamic> pair in perfChart) {
       DateTime currDateTime =
@@ -95,6 +114,27 @@ abstract class _BlackRockStore with Store {
     );
 
     lineChartData = LineChartData(
+      lineTouchData: LineTouchData(
+        touchTooltipData: LineTouchTooltipData(
+          getTooltipItems: (touchedSpots) {
+            if (touchedSpots == null) {
+              return null;
+            }
+            return touchedSpots.map((LineBarSpot touchedSpot) {
+              if (touchedSpot == null) {
+                return null;
+              }
+              final TextStyle textStyle = TextStyle(
+                color: touchedSpot.bar.colors[0],
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              );
+              return LineTooltipItem('\$${touchedSpot.y} \n +\$${double.parse((touchedSpot.y - initialInvestment).toStringAsExponential(2))}', textStyle);
+            }).toList();
+            
+          }
+        )
+      ),
       gridData: FlGridData(
         verticalInterval: 1,
         horizontalInterval: 200,
@@ -139,13 +179,8 @@ abstract class _BlackRockStore with Store {
             fontSize: 8,
           ),
           getTitles: (value) {
-            switch (value.toInt()) {
-              case 2:
-                return '10k';
-              case 3:
-                return '30k';
-              case 5:
-                return '50k';
+            if (value%200 == 0) {
+              return "\$" + value.toInt().toString();
             }
             return '';
           },

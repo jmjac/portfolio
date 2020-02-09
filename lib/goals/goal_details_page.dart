@@ -5,6 +5,8 @@ import 'package:portfolio/goals/goal.dart';
 import 'package:portfolio/goals/store/goalStore.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:portfolio/black_rock/store/black_rock.dart';
+import 'package:fl_chart/fl_chart.dart' as flCharts;
 
 class GoalDetailsPage extends StatelessWidget {
   int index;
@@ -15,6 +17,8 @@ class GoalDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final goalStore = Provider.of<GoalStore>(context);
+    final BlackRockStore blackRockStore = Provider.of<BlackRockStore>(context);
+    blackRockStore.mainData();
     Goal goal = goalStore.goals[index];
     return Scaffold(
       body: Column(
@@ -106,12 +110,20 @@ class GoalDetailsPage extends StatelessWidget {
             )
           ]),
           SizedBox(
-            child: Placeholder(
-              color: Colors.grey,
-            ),
-            width: 250,
-            height: 250,
-          ),
+              child: Observer(
+            builder: (_) => Container(
+                child: Column(children: [
+              Text("Total Profit: \$" + blackRockStore.profit.toString(),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              Padding(
+                padding: const EdgeInsets.only(
+                    right: 18.0, left: 2, top: 24, bottom: 12),
+                child: flCharts.LineChart(
+                  blackRockStore.lineChartData,
+                ),
+              )
+            ])),
+          )),
           Padding(
             padding: EdgeInsets.all(16.0),
           ),
