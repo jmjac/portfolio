@@ -124,8 +124,9 @@ class GoalDetailsPage extends StatelessWidget {
               child: Observer(
             builder: (_) => Container(
                 child: Column(children: [
-              Text("Total Profit: \$" + blackRockStore.profit.toString(),
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              Text(
+                  "You are \$ ${(blackRockStore.profit).toDouble().toStringAsFixed(2)} closer to ${goal.name}",
+                  style: TextStyle(fontSize: 20)),
               Padding(
                 padding: const EdgeInsets.only(
                     right: 18.0, left: 2, top: 8, bottom: 12),

@@ -12,7 +12,9 @@ class IconPicker extends StatelessWidget {
     Icons.directions_car,
     Icons.phone_android,
     Icons.restaurant,
-    Icons.wb_cloudy
+    Icons.wb_cloudy,
+    Icons.pregnant_woman,
+    Icons.card_giftcard
     // all the icons you want to include
   ];
 

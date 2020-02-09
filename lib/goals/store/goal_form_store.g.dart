@@ -300,4 +300,14 @@ mixin _$GoalFormStore on _GoalFormStore, Store {
       _$_GoalFormStoreActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  void reset() {
+    final _$actionInfo = _$_GoalFormStoreActionController.startAction();
+    try {
+      return super.reset();
+    } finally {
+      _$_GoalFormStoreActionController.endAction(_$actionInfo);
+    }
+  }
 }

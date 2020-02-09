@@ -58,6 +58,7 @@ dependencies:
 
 
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -66,11 +67,17 @@ dev_dependencies:
   # State management mobx
   mobx_codegen: ^0.4.1+2
 
-  #JSON
+  # JSON
   json_serializable: ^3.2.5
 
+  # Icon
+  flutter_launcher_icons: "^0.7.3"
 
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/genie_logo.png"
 
 
 # For information on the generic Dart part of this file, see the

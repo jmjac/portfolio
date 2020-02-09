@@ -107,16 +107,7 @@ abstract class _GoalFormStore with Store {
           goalPrice: goalPrice,
           name: name,
           positionsInvestment: positionsInvestment));
-      positions = [];
-      positionsInvestment = [];
-      name = null;
-      startDate = null;
-      endDate = null;
-      positionsFollowed = ObservableList.of(List.filled(15, false));
-      goalPrice = null;
-      initialInvestment = null;
-      description = null;
-      error = null;
+      reset();
       return true;
     } else {
       error = "Please fill in all required fields";
@@ -127,5 +118,20 @@ abstract class _GoalFormStore with Store {
   @action
   void flipTest() {
     test = !test;
+  }
+
+  @action
+  void reset(){
+    positions = [];
+    positionsInvestment = [];
+    name = null;
+    startDate = null;
+    endDate = null;
+    positionsFollowed = ObservableList.of(List.filled(15, false));
+    goalPrice = null;
+    initialInvestment = null;
+    description = null;
+    error = null;
+    icon = null;
   }
 }

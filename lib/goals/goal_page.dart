@@ -9,6 +9,7 @@ import 'package:portfolio/goals/add_goal_page.dart';
 import 'package:portfolio/goals/goal_details_page.dart';
 import 'package:portfolio/goals/goal.dart';
 import 'package:portfolio/goals/store/goalStore.dart';
+import 'package:portfolio/goals/store/goal_form_store.dart';
 import 'package:provider/provider.dart';
 
 class GoalPage extends StatelessWidget {
@@ -16,7 +17,7 @@ class GoalPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final GoalStore goalStore = Provider.of<GoalStore>(context);
     goalStore.loadGoals();
-
+//
     return Container(
         color: Theme.of(context).primaryColor,
         child: Observer(
