@@ -98,7 +98,6 @@ class BlackRockAPIPortfolio {
   void _addCalculatePerformance(bool value) {
     _baseUrl += _baseUrl.endsWith("?") ? "" : "&";
     _baseUrl += "calculatePerformance=$value";
-    _baseUrl += "includeReturnsMap=$value";
   }
 
   void _addCalculateStressTests(bool value) {

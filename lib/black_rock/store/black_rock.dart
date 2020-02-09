@@ -22,9 +22,10 @@ abstract class _BlackRockStore with Store {
         "CATNX": 300.49,
         "AAPL": 100.00,
       },
-      startDate: 1546300800000,
-      calculatePerformance: true,
-      onlyMonthEndPerfChart: true);
+      // startDate: 1546300800000,
+      // calculatePerformance: true,
+      // onlyMonthEndPerfChart: true);
+  );
   BlackRockAPIPerformance performance;
 
   double initialInvestment = 1000.0;
@@ -68,8 +69,7 @@ abstract class _BlackRockStore with Store {
   Future<void> mainData() async {
     List<dynamic> perfChart = await portfolio.getPerfChart();
     List<FlSpot> perfChartData = [];
-    int initialYear =
-        DateTime.fromMillisecondsSinceEpoch(perfChart[0][0], isUtc: true).year;
+    int initialYear = DateTime.fromMillisecondsSinceEpoch(perfChart[0][0], isUtc: true).year;
 
     for (List<dynamic> pair in perfChart) {
       DateTime currDateTime =
@@ -80,19 +80,10 @@ abstract class _BlackRockStore with Store {
     }
 
     LineChartBarData liveData = LineChartBarData(
-      // spots: perfChartData,
-      spots: const [
-        FlSpot(0, 3),
-        FlSpot(2.6, 2),
-        FlSpot(4.9, 5),
-        FlSpot(6.8, 3.1),
-        FlSpot(8, 4),
-        FlSpot(9.5, 3),
-        FlSpot(11, 4),
-      ],
+      spots: perfChartData,
       isCurved: true,
       colors: gradientColors,
-      barWidth: 5,
+      barWidth: 2,
       isStrokeCapRound: true,
       dotData: const FlDotData(
         show: false,
@@ -105,18 +96,20 @@ abstract class _BlackRockStore with Store {
 
     lineChartData = LineChartData(
       gridData: FlGridData(
+        verticalInterval: 1,
+        horizontalInterval: 200,
         show: true,
         drawVerticalLine: true,
         getDrawingHorizontalLine: (value) {
           return const FlLine(
             color: Colors.red,
-            strokeWidth: 1,
+            strokeWidth: .2,
           );
         },
         getDrawingVerticalLine: (value) {
           return const FlLine(
             color: Colors.red,
-            strokeWidth: 1,
+            strokeWidth: .2,
           );
         },
       ),
@@ -124,12 +117,18 @@ abstract class _BlackRockStore with Store {
         show: true,
         bottomTitles: SideTitles(
           showTitles: true,
-          reservedSize: 22,
+          reservedSize: 10,
           textStyle: TextStyle(
               color: const Color(0xff68737d),
               fontWeight: FontWeight.bold,
-              fontSize: 16),
-          getTitles: (value) {},
+              fontSize: 8),
+          getTitles: (value) {
+            if (value.toInt()%12 == 1 || value.toInt()%12 == 6 || value.toInt()%12 == 0) {
+              // Formats the titles in the form m/yyyy
+              return value.toString() + '/' + (initialYear + value.toInt()%12).toString();
+            }
+            return '';
+          },
           margin: 8,
         ),
         leftTitles: SideTitles(
@@ -137,7 +136,7 @@ abstract class _BlackRockStore with Store {
           textStyle: TextStyle(
             color: const Color(0xff67727d),
             fontWeight: FontWeight.bold,
-            fontSize: 15,
+            fontSize: 8,
           ),
           getTitles: (value) {
             switch (value.toInt()) {
@@ -157,10 +156,10 @@ abstract class _BlackRockStore with Store {
       borderData: FlBorderData(
           show: true,
           border: Border.all(color: const Color(0xff37434d), width: 1)),
-      minX: 0,
-      maxX: 24,
+      // minX: 0,
+      // maxX: 24,
       minY: 0,
-      maxY: 5000,
+      maxY: initialInvestment * 2,
       lineBarsData: [liveData],
     );
   }
