@@ -94,7 +94,9 @@ abstract class _BlackRockStore with Store {
     profit = double.parse(
         ((perfChart[perfChart.length - 1][1] - 1) * initialInvestment)
             .toStringAsFixed(2));
-
+    monthChange = double.parse(
+        ((1 - (perfChart[perfChart.length - 1][1] - perfChart[perfChart.length - 2][1])) * initialInvestment)
+            .toStringAsFixed(2));
     for (List<dynamic> pair in perfChart) {
       DateTime currDateTime =
           DateTime.fromMillisecondsSinceEpoch(pair[0], isUtc: true);

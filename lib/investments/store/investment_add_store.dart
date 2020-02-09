@@ -52,8 +52,7 @@ abstract class _InvestmentAddStore with Store {
   @action
   bool validateAndSubmit(BlackRockStore blackRockStore) {
     print("Validation start");
-    if (price != null &&
-        companyTicker != null &&
+    if (companyTicker != null &&
         companyName != "Not in the database" &&
         percentage != null) {
       Map<String, double> portfolioMap = blackRockStore.portfolio.positionsMap;

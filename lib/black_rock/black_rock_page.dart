@@ -20,7 +20,7 @@ class BlackRockPage extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Portfolio Summary"),
+          title: Text("Portfolio"),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
@@ -41,16 +41,21 @@ class BlackRockPage extends StatelessWidget {
             Observer(
               builder: (_) => Container(
                   child: Column(children: [
-                Text("Total Profit: \$" + "${blackRockStore.profit}",
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 18.0, left: 2, top: 24, bottom: 12),
+                  child: Text("\$${investmentStore.monthChange} gained this month", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+                Text("Your Earnings", style: TextStyle(fontSize: 40, fontWeight: FontWeight.w800)),
                 Padding(
                   padding: const EdgeInsets.only(
                       right: 18.0, left: 2, top: 24, bottom: 12),
                   child: flCharts.LineChart(
                     blackRockStore.lineChartData,
                   ),
-                )
+                ),
+                Text("In total, you've earned \$" + "${blackRockStore.profit} from investing!",
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold))
               ])),
             )
           ])),

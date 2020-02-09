@@ -82,20 +82,20 @@ class InvestmentAddPage extends StatelessWidget {
                       inputFormatters: <TextInputFormatter>[
                         WhitelistingTextInputFormatter.digitsOnly
                       ])),
-              Container(
-                  padding: EdgeInsets.all(8.0),
-                  color: Colors.white,
-                  child: TextFormField(
-                      decoration: InputDecoration(
-                          prefix: Text("\% "),
-                          labelText: "% Portfolio Purchased",
-                          hintText:
-                              "What percent of your portfolio is this new purchase?"),
-                      keyboardType: TextInputType.number,
-                      onChanged: (String value) => investmentAddStore.setPrice(double.parse(value)),
-                      inputFormatters: <TextInputFormatter>[
-                        WhitelistingTextInputFormatter.digitsOnly
-                      ])),
+              // Container(
+              //     padding: EdgeInsets.all(8.0),
+              //     color: Colors.white,
+              //     child: TextFormField(
+              //         decoration: InputDecoration(
+              //             prefix: Text("\% "),
+              //             labelText: "% Portfolio Purchased",
+              //             hintText:
+              //                 "What percent of your portfolio is this new purchase?"),
+              //         keyboardType: TextInputType.number,
+              //         onChanged: (String value) => investmentAddStore.setPrice(double.parse(value)),
+              //         inputFormatters: <TextInputFormatter>[
+              //           WhitelistingTextInputFormatter.digitsOnly
+              //         ])),
               Padding(
                   padding: EdgeInsets.all(24.0),
                   child: SizedBox(

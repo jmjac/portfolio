@@ -20,9 +20,12 @@ class GoalDetailsPage extends StatelessWidget {
     final goalStore = Provider.of<GoalStore>(context);
     final BlackRockStore blackRockStore = Provider.of<BlackRockStore>(context);
     Goal goal = goalStore.goals[index];
+    if(goal.startDate == 0) {
+      goal.startDate = 1580515200;
+    }
     BlackRockAPIPortfolio portfolio = BlackRockAPIPortfolio(
         positions: goal.positionsToFeedToAPI,
-        startDate: 1546300800000,
+        startDate: goal.startDate,
         calculatePerformance: true,
         onlyMonthEndPerfChart: true);
     blackRockStore.mainData(portfolio: portfolio);

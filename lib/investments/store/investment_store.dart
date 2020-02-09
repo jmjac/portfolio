@@ -31,14 +31,14 @@ abstract class _InvestmentStore with Store {
   @observable
   double added = 0;
 
-  // @action
-  // Future<void> calculateChange() async {
-  //   Map<String, dynamic> returnsMap = await portfolio.getReturnsMap();
-  //   for (String date in returnsMap.keys) {
-  //     monthChange = returnsMap[date]["oneMonth"] * initialInvestment;
-  //     totalGain = returnsMap[date]["level"] * initialInvestment;
-  //   }
-  // }
+  @action
+  Future<void> calculateChange() async {
+    Map<String, dynamic> returnsMap = await portfolio.getReturnsMap();
+    for (String date in returnsMap.keys) {
+      monthChange = returnsMap[date]["oneMonth"] * initialInvestment;
+      totalGain = returnsMap[date]["level"] * initialInvestment;
+    }
+  }
 
   @action
   void loadGeneralPortfolio(){
@@ -52,6 +52,8 @@ abstract class _InvestmentStore with Store {
   @action
   void addToInvestment() {
     initialInvestment += added;
+    monthChange = initialInvestment * .021;
   }
+
 
 }
