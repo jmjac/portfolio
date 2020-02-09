@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 
 class IconPicker extends StatelessWidget {
   static List<IconData> icons = [
-    Icons.ac_unit,
-    Icons.access_alarm,
-    Icons.access_time,
+    Icons.airplanemode_active,
+    Icons.beach_access,
+    Icons.child_care,
+    Icons.school,
+    Icons.computer,
+    Icons.attach_money,
+    Icons.directions_bike,
+    Icons.directions_car,
+    Icons.phone_android,
+    Icons.restaurant,
+    Icons.wb_cloudy
     // all the icons you want to include
   ];
 
