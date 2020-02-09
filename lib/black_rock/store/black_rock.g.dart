@@ -26,23 +26,6 @@ mixin _$BlackRockStore on _BlackRockStore, Store {
     }, _$monthChangeAtom, name: '${_$monthChangeAtom.name}_set');
   }
 
-  final _$seriesPerMonthAtom = Atom(name: '_BlackRockStore.seriesPerMonth');
-
-  @override
-  List<Charts.Series<DataPoint, DateTime>> get seriesPerMonth {
-    _$seriesPerMonthAtom.context.enforceReadPolicy(_$seriesPerMonthAtom);
-    _$seriesPerMonthAtom.reportObserved();
-    return super.seriesPerMonth;
-  }
-
-  @override
-  set seriesPerMonth(List<Charts.Series<DataPoint, DateTime>> value) {
-    _$seriesPerMonthAtom.context.conditionallyRunInAction(() {
-      super.seriesPerMonth = value;
-      _$seriesPerMonthAtom.reportChanged();
-    }, _$seriesPerMonthAtom, name: '${_$seriesPerMonthAtom.name}_set');
-  }
-
   final _$pieChartDataAtom = Atom(name: '_BlackRockStore.pieChartData');
 
   @override
@@ -75,14 +58,6 @@ mixin _$BlackRockStore on _BlackRockStore, Store {
       super.lineChartData = value;
       _$lineChartDataAtom.reportChanged();
     }, _$lineChartDataAtom, name: '${_$lineChartDataAtom.name}_set');
-  }
-
-  final _$loadLinearGraphDataAsyncAction = AsyncAction('loadLinearGraphData');
-
-  @override
-  Future<void> loadLinearGraphData() {
-    return _$loadLinearGraphDataAsyncAction
-        .run(() => super.loadLinearGraphData());
   }
 
   final _$mainDataAsyncAction = AsyncAction('mainData');

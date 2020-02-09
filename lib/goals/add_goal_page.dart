@@ -50,6 +50,7 @@ class AddGoalPage extends StatelessWidget {
                 child: Observer(
                     builder: (_) => TextFormField(
                         style: TextStyle(color: Colors.black),
+                        onChanged: (String value) => goalFormStore.setName(value),
                         decoration: InputDecoration(
                           labelText: 'Title',
                           hintText: 'Your goal name',
@@ -61,6 +62,7 @@ class AddGoalPage extends StatelessWidget {
                 child: Observer(
                     builder: (_) =>TextFormField(
                         style: TextStyle(color: Colors.black),
+                        onChanged: (String value) => goalFormStore.setName(value),
                         maxLines: 5,
                         decoration: InputDecoration(
                           labelText: 'Description',

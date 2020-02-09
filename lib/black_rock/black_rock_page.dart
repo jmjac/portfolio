@@ -11,7 +11,6 @@ class BlackRockPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BlackRockStore blackRockStore = Provider.of<BlackRockStore>(context);
-    blackRockStore.loadLinearGraphData();
     blackRockStore.loadPieChartData();
     blackRockStore.mainData();
 
@@ -38,19 +37,15 @@ class BlackRockPage extends StatelessWidget {
                       arcWidth: 60,
                       arcRendererDecorators: [Charts.ArcLabelDecorator()]))),
         ),
-        Container(
-            decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(18),
-                ),
-                color: Colors.white),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 18.0, left: 12.0, top: 24, bottom: 12),
-              child: 
-              flCharts.LineChart(
-                blackRockStore.lineChartData,
-              ),
+        Observer(
+          builder: (_) => Container(
+              child: Padding(
+            padding: const EdgeInsets.only(
+                right: 18.0, left: 12.0, top: 24, bottom: 12),
+            child: flCharts.LineChart(
+              blackRockStore.lineChartData,
             ),
+          )),
         )
       ])),
     );
