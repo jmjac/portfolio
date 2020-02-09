@@ -1,4 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+
+import '../goal.dart';
+import 'goalStore.dart';
 
 part 'goal_form_store.g.dart';
 
@@ -16,9 +20,13 @@ abstract class _GoalFormStore with Store {
   @observable
   double initialInvestment;
   @observable
+  String description;
+  @observable
   int icon;
   @observable
   List<String> positions = [];
+  @observable
+  String error;
 
   @action
   void setName(String value) {
@@ -28,6 +36,11 @@ abstract class _GoalFormStore with Store {
   @action
   void setStartDate(int value) {
     startDate = value;
+  }
+
+  @action
+  void setDescription(String value) {
+    description = value;
   }
 
   @action
@@ -46,7 +59,41 @@ abstract class _GoalFormStore with Store {
   }
 
   @action
-  setIcon(int value) {
+  void setIcon(int value) {
     icon = value;
+  }
+
+  @action
+  void changePositions(String position) {
+    if (positions.contains(position)) {
+      positions.remove(position);
+    } else {
+      positions.add(position);
+    }
+  }
+
+  @action
+  bool validateAndSubmit(GoalStore goalStore) {
+    if (positions.isNotEmpty &&
+        name != null &&
+        name.isNotEmpty &&
+        goalPrice != null &&
+        initialInvestment != null) {
+      goalStore.addGoal(Goal(
+          initialInvestment: initialInvestment,
+          icon: Icons.card_giftcard.codePoint,
+          description: description != null ? description : "",
+          positions: positions,
+          beginDate: startDate != null ? startDate : 0,
+          endDate: endDate != null
+              ? endDate
+              : DateTime.now().toUtc().millisecondsSinceEpoch,
+          goalPrice: goalPrice,
+          name: name));
+      return true;
+    }else{
+      error = "Please fill in all required fields";
+    }
+    return false;
   }
 }

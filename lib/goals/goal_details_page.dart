@@ -42,8 +42,7 @@ class GoalDetailsPage extends StatelessWidget {
                                     child: CircularPercentIndicator(
                                       radius: 160,
                                       backgroundColor: Colors.white,
-                                      percent: goal.initialInvestment /
-                                          goal.goalPrice,
+                                      percent: goal.fullfiled,
                                       progressColor: Colors.red,
                                       lineWidth: 10.0,
                                       animation: false,
@@ -71,6 +70,7 @@ class GoalDetailsPage extends StatelessWidget {
                 ),
               )),
           Padding(padding: EdgeInsets.all(16.0)),
+          Text("${goal.description}"),
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             Text(
               "Goal Start Date:",

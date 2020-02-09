@@ -7,18 +7,26 @@ part 'goal.g.dart';
 class Goal {
   Goal(
       {this.name,
+      this.description,
       this.beginDate,
       this.endDate,
       this.goalPrice,
       this.initialInvestment,
       this.icon,
-      this.positions});
+      this.positions}) {
+    fullfiled = initialInvestment / goalPrice;
+    if (fullfiled > 1) {
+      fullfiled = 1;
+    }
+  }
 
   String name;
   int beginDate;
   int endDate;
+  String description;
   double goalPrice;
   double initialInvestment;
+  double fullfiled;
   int icon;
   List<String> positions;
 

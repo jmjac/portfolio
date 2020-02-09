@@ -95,6 +95,23 @@ mixin _$GoalFormStore on _GoalFormStore, Store {
     }, _$initialInvestmentAtom, name: '${_$initialInvestmentAtom.name}_set');
   }
 
+  final _$descriptionAtom = Atom(name: '_GoalFormStore.description');
+
+  @override
+  String get description {
+    _$descriptionAtom.context.enforceReadPolicy(_$descriptionAtom);
+    _$descriptionAtom.reportObserved();
+    return super.description;
+  }
+
+  @override
+  set description(String value) {
+    _$descriptionAtom.context.conditionallyRunInAction(() {
+      super.description = value;
+      _$descriptionAtom.reportChanged();
+    }, _$descriptionAtom, name: '${_$descriptionAtom.name}_set');
+  }
+
   final _$iconAtom = Atom(name: '_GoalFormStore.icon');
 
   @override
@@ -129,6 +146,23 @@ mixin _$GoalFormStore on _GoalFormStore, Store {
     }, _$positionsAtom, name: '${_$positionsAtom.name}_set');
   }
 
+  final _$errorAtom = Atom(name: '_GoalFormStore.error');
+
+  @override
+  String get error {
+    _$errorAtom.context.enforceReadPolicy(_$errorAtom);
+    _$errorAtom.reportObserved();
+    return super.error;
+  }
+
+  @override
+  set error(String value) {
+    _$errorAtom.context.conditionallyRunInAction(() {
+      super.error = value;
+      _$errorAtom.reportChanged();
+    }, _$errorAtom, name: '${_$errorAtom.name}_set');
+  }
+
   final _$_GoalFormStoreActionController =
       ActionController(name: '_GoalFormStore');
 
@@ -147,6 +181,16 @@ mixin _$GoalFormStore on _GoalFormStore, Store {
     final _$actionInfo = _$_GoalFormStoreActionController.startAction();
     try {
       return super.setStartDate(value);
+    } finally {
+      _$_GoalFormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setDescription(String value) {
+    final _$actionInfo = _$_GoalFormStoreActionController.startAction();
+    try {
+      return super.setDescription(value);
     } finally {
       _$_GoalFormStoreActionController.endAction(_$actionInfo);
     }
@@ -183,10 +227,30 @@ mixin _$GoalFormStore on _GoalFormStore, Store {
   }
 
   @override
-  dynamic setIcon(int value) {
+  void setIcon(int value) {
     final _$actionInfo = _$_GoalFormStoreActionController.startAction();
     try {
       return super.setIcon(value);
+    } finally {
+      _$_GoalFormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changePositions(String position) {
+    final _$actionInfo = _$_GoalFormStoreActionController.startAction();
+    try {
+      return super.changePositions(position);
+    } finally {
+      _$_GoalFormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  bool validateAndSubmit(GoalStore goalStore) {
+    final _$actionInfo = _$_GoalFormStoreActionController.startAction();
+    try {
+      return super.validateAndSubmit(goalStore);
     } finally {
       _$_GoalFormStoreActionController.endAction(_$actionInfo);
     }

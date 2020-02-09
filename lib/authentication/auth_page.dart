@@ -118,7 +118,8 @@ class AuthPage extends StatelessWidget {
     return Hero(
       tag: 'logo',
       child: CircleAvatar(
-        child: Text("PortfolioGini"),
+        child: Image.asset("assets/images/genie_logo.png"),
+        backgroundColor: Colors.transparent,
         minRadius: 100,
       ),
     );
