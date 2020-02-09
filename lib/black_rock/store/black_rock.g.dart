@@ -9,6 +9,23 @@ part of 'black_rock.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$BlackRockStore on _BlackRockStore, Store {
+  final _$profitAtom = Atom(name: '_BlackRockStore.profit');
+
+  @override
+  double get profit {
+    _$profitAtom.context.enforceReadPolicy(_$profitAtom);
+    _$profitAtom.reportObserved();
+    return super.profit;
+  }
+
+  @override
+  set profit(double value) {
+    _$profitAtom.context.conditionallyRunInAction(() {
+      super.profit = value;
+      _$profitAtom.reportChanged();
+    }, _$profitAtom, name: '${_$profitAtom.name}_set');
+  }
+
   final _$monthChangeAtom = Atom(name: '_BlackRockStore.monthChange');
 
   @override

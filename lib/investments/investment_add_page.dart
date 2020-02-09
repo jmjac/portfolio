@@ -15,8 +15,9 @@ class InvestmentAddPage extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.all(8.0),
-
-          )
+          ),
+          Text("STOCK TICKER:"),
+          SizedBox(child: Container(child: TextFormField())),
         ],
       ),
     );

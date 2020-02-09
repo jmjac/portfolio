@@ -12,7 +12,6 @@ class HomePage extends StatelessWidget {
   final pages = <StatelessWidget>[
     GoalPage(),
     InvestmentPage(),
-    BlackRockPage()
   ];
 
   @override
@@ -23,7 +22,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("PortfoliQ"),
+          title: Text("Genie"),
           centerTitle: true,
           actions: <Widget>[
             IconButton(

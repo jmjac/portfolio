@@ -15,36 +15,41 @@ class BlackRockPage extends StatelessWidget {
     blackRockStore.mainData();
 
     return Scaffold(
-      body: Center(
-          child: Column(children: [
-        SizedBox(
-          height: 250,
-          width: 250,
-          child: Observer(
-              builder: (_) => Charts.PieChart(blackRockStore.pieChartData,
-                  animate: true,
-                  defaultRenderer: Charts.ArcRendererConfig(
-                      arcWidth: 60,
-                      arcRendererDecorators: [Charts.ArcLabelDecorator()]))),
+        appBar: AppBar(
+          title: Text("Portfolio Summary"),
+          centerTitle: true,
         ),
-        Observer(
-          builder: (_) => Container(
+        body: SingleChildScrollView(
+          child: Center(
               child: Column(children: [
-                    Text("Total Profit: \$" + blackRockStore.profit.toString(), style:
-                      TextStyle(fontSize: 20,
-                        fontWeight: FontWeight.bold
-                      )
-                    ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        right: 18.0, left: 2, top: 24, bottom: 12),
-                    child: flCharts.LineChart(
-                      blackRockStore.lineChartData,
-                    ),
-                  )
+            SizedBox(
+              height: 250,
+              width: 250,
+              child: Observer(
+                  builder: (_) => Charts.PieChart(blackRockStore.pieChartData,
+                      animate: true,
+                      defaultRenderer: Charts.ArcRendererConfig(
+                          arcWidth: 60,
+                          arcRendererDecorators: [
+                            Charts.ArcLabelDecorator()
+                          ]))),
+            ),
+            Observer(
+              builder: (_) => Container(
+                  child: Column(children: [
+                Text("Total Profit: \$" + blackRockStore.profit.toString(),
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 18.0, left: 2, top: 24, bottom: 12),
+                  child: flCharts.LineChart(
+                    blackRockStore.lineChartData,
+                  ),
+                )
               ])),
-        )
-      ])),
-    );
+            )
+          ])),
+        ));
   }
 }
