@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:portfolio/black_rock/store/black_rock.dart';
-
+import 'package:portfolio/investments/store/investment_store.dart';
 part 'investment_add_store.g.dart';
 
 class InvestmentAddStore extends _InvestmentAddStore with _$InvestmentAddStore {
@@ -41,6 +41,7 @@ abstract class _InvestmentAddStore with Store {
   @action
   void setPrice(double value) {
     price = value;
+    
   }
 
   @action

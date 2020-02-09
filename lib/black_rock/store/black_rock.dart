@@ -29,6 +29,7 @@ abstract class _BlackRockStore with Store {
   );
   BlackRockAPIPerformance performance;
 
+  @observable
   double initialInvestment = 1000.0;
 
   final months = [

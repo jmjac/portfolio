@@ -43,11 +43,39 @@ mixin _$InvestmentStore on _InvestmentStore, Store {
     }, _$monthChangeAtom, name: '${_$monthChangeAtom.name}_set');
   }
 
-  final _$calculateChangeAsyncAction = AsyncAction('calculateChange');
+  final _$initialInvestmentAtom =
+      Atom(name: '_InvestmentStore.initialInvestment');
 
   @override
-  Future<void> calculateChange() {
-    return _$calculateChangeAsyncAction.run(() => super.calculateChange());
+  double get initialInvestment {
+    _$initialInvestmentAtom.context.enforceReadPolicy(_$initialInvestmentAtom);
+    _$initialInvestmentAtom.reportObserved();
+    return super.initialInvestment;
+  }
+
+  @override
+  set initialInvestment(double value) {
+    _$initialInvestmentAtom.context.conditionallyRunInAction(() {
+      super.initialInvestment = value;
+      _$initialInvestmentAtom.reportChanged();
+    }, _$initialInvestmentAtom, name: '${_$initialInvestmentAtom.name}_set');
+  }
+
+  final _$addedAtom = Atom(name: '_InvestmentStore.added');
+
+  @override
+  double get added {
+    _$addedAtom.context.enforceReadPolicy(_$addedAtom);
+    _$addedAtom.reportObserved();
+    return super.added;
+  }
+
+  @override
+  set added(double value) {
+    _$addedAtom.context.conditionallyRunInAction(() {
+      super.added = value;
+      _$addedAtom.reportChanged();
+    }, _$addedAtom, name: '${_$addedAtom.name}_set');
   }
 
   final _$_InvestmentStoreActionController =
@@ -58,6 +86,26 @@ mixin _$InvestmentStore on _InvestmentStore, Store {
     final _$actionInfo = _$_InvestmentStoreActionController.startAction();
     try {
       return super.loadGeneralPortfolio();
+    } finally {
+      _$_InvestmentStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setAddToInvestment(double add) {
+    final _$actionInfo = _$_InvestmentStoreActionController.startAction();
+    try {
+      return super.setAddToInvestment(add);
+    } finally {
+      _$_InvestmentStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addToInvestment() {
+    final _$actionInfo = _$_InvestmentStoreActionController.startAction();
+    try {
+      return super.addToInvestment();
     } finally {
       _$_InvestmentStoreActionController.endAction(_$actionInfo);
     }

@@ -6,11 +6,15 @@ import 'package:charts_flutter/flutter.dart' as Charts;
 import 'package:portfolio/settings/store/settings.dart';
 import 'package:provider/provider.dart';
 import 'package:fl_chart/fl_chart.dart' as flCharts;
+import 'package:portfolio/investments/store/investment_store.dart';
 
 class BlackRockPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BlackRockStore blackRockStore = Provider.of<BlackRockStore>(context);
+      final InvestmentStore investmentStore =
+        Provider.of<InvestmentStore>(context);
+    blackRockStore.initialInvestment = investmentStore.initialInvestment;
     blackRockStore.loadPieChartData();
     blackRockStore.mainData(portfolio: blackRockStore.portfolio);
 

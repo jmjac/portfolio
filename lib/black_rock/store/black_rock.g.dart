@@ -26,6 +26,24 @@ mixin _$BlackRockStore on _BlackRockStore, Store {
     }, _$portfolioAtom, name: '${_$portfolioAtom.name}_set');
   }
 
+  final _$initialInvestmentAtom =
+      Atom(name: '_BlackRockStore.initialInvestment');
+
+  @override
+  double get initialInvestment {
+    _$initialInvestmentAtom.context.enforceReadPolicy(_$initialInvestmentAtom);
+    _$initialInvestmentAtom.reportObserved();
+    return super.initialInvestment;
+  }
+
+  @override
+  set initialInvestment(double value) {
+    _$initialInvestmentAtom.context.conditionallyRunInAction(() {
+      super.initialInvestment = value;
+      _$initialInvestmentAtom.reportChanged();
+    }, _$initialInvestmentAtom, name: '${_$initialInvestmentAtom.name}_set');
+  }
+
   final _$profitAtom = Atom(name: '_BlackRockStore.profit');
 
   @override

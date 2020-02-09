@@ -148,4 +148,8 @@ class BlackRockAPIPortfolio {
     print(_baseUrl);
     return portfolio["returns"]["performanceChart"];
   }
+
+  Map<String, double> getPositionsMap() {
+    return positionsMap;
+  }
 }

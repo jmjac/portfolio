@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:portfolio/black_rock/store/black_rock.dart';
 import 'package:portfolio/investments/store/investment_add_store.dart';
+import 'package:portfolio/investments/store/investment_store.dart';
 import 'package:provider/provider.dart';
 
 class InvestmentAddPage extends StatelessWidget {
@@ -12,6 +13,8 @@ class InvestmentAddPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final InvestmentAddStore investmentAddStore =
         Provider.of<InvestmentAddStore>(context);
+        final InvestmentStore investmentStore =
+        Provider.of<InvestmentStore>(context);
     final BlackRockStore blackRockStore = Provider.of<BlackRockStore>(context);
 
     return Scaffold(
@@ -72,8 +75,10 @@ class InvestmentAddPage extends StatelessWidget {
                           labelText: "Money Invested",
                           hintText: "Initial amount of money invested"),
                       keyboardType: TextInputType.number,
-                      onChanged: (String value) =>
-                          investmentAddStore.setPrice(double.parse(value)),
+                      onChanged: (String value) => {
+                          investmentAddStore.setPercentage(double.parse(value)),
+                          investmentStore.setAddToInvestment(double.parse(value))
+                          },
                       inputFormatters: <TextInputFormatter>[
                         WhitelistingTextInputFormatter.digitsOnly
                       ])),
@@ -87,7 +92,7 @@ class InvestmentAddPage extends StatelessWidget {
                           hintText:
                               "What percent of your portfolio is this new purchase?"),
                       keyboardType: TextInputType.number,
-                      onChanged: (String value) => investmentAddStore.setPercentage(double.parse(value)),
+                      onChanged: (String value) => investmentAddStore.setPrice(double.parse(value)),
                       inputFormatters: <TextInputFormatter>[
                         WhitelistingTextInputFormatter.digitsOnly
                       ])),
@@ -104,6 +109,7 @@ class InvestmentAddPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(100),
                         ),
                         onPressed: () {
+                          investmentStore.addToInvestment();
                           bool success = investmentAddStore
                               .validateAndSubmit(blackRockStore);
                           if (success) {

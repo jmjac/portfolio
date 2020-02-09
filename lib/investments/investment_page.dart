@@ -14,7 +14,7 @@ class InvestmentPage extends StatelessWidget {
         Provider.of<InvestmentStore>(context);
     final BlackRockStore blackRockStore = Provider.of<BlackRockStore>(context);
 
-    investmentStore.calculateChange();
+    // investmentStore.calculateChange();
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -32,7 +32,7 @@ class InvestmentPage extends StatelessWidget {
                         builder: (_) => Padding(
                             padding: EdgeInsets.only(top: 51.0),
                             child: Text(
-                                "\$${investmentStore.totalGain.toStringAsFixed(2)}",
+                                "\$${investmentStore.initialInvestment.toStringAsFixed(2)}",
                                 style: TextStyle(fontSize: 48))),
                       ),
                       Observer(
@@ -78,13 +78,15 @@ class InvestmentPage extends StatelessWidget {
                 onDismissed: (_) {
                   Map<String, double> positions =
                       investmentStore.portfolio.positionsMap;
+                  investmentStore.setAddToInvestment(0 - positions[investmentStore.portfolio.positionsNames[index]]);
+                  investmentStore.addToInvestment();
                   positions
                       .remove(investmentStore.portfolio.positionsNames[index]);
                   investmentStore.portfolio.positionsNames.removeAt(index);
                   investmentStore.portfolio.changePositions(positions);
                   investmentStore.portfolio.getReturnsMap();
                   blackRockStore.mainData();
-                  investmentStore.calculateChange();
+                  // investmentStore.calculateChange();
                 },
                 child: Column(children: [
                   ListTile(
@@ -92,7 +94,7 @@ class InvestmentPage extends StatelessWidget {
                       title: Text(
                           "${investmentStore.portfolio.positionsNames[index]}"),
                       subtitle: Text(
-                          "${investmentStore.portfolio.positionsMap[investmentStore.portfolio.positionsNames[index]]}")),
+                          "\$${investmentStore.portfolio.positionsMap[investmentStore.portfolio.positionsNames[index]]}")),
                   Divider(
                     height: 0,
                   )
