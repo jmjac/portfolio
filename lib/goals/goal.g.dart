@@ -20,6 +20,7 @@ Goal _$GoalFromJson(Map<String, dynamic> json) {
         ?.map((e) => (e as num)?.toDouble())
         ?.toList(),
   )
+    ..currentValue = (json['currentValue'] as num)?.toDouble()
     ..fulfilled = (json['fulfilled'] as num)?.toDouble()
     ..positionsToFeedToAPI =
         (json['positionsToFeedToAPI'] as Map<String, dynamic>)?.map(
@@ -34,6 +35,7 @@ Map<String, dynamic> _$GoalToJson(Goal instance) => <String, dynamic>{
       'description': instance.description,
       'goalPrice': instance.goalPrice,
       'initialInvestment': instance.initialInvestment,
+      'currentValue': instance.currentValue,
       'fulfilled': instance.fulfilled,
       'icon': instance.icon,
       'positions': instance.positions,

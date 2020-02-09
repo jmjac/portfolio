@@ -20,21 +20,14 @@ class GoalDetailsPage extends StatelessWidget {
     final goalStore = Provider.of<GoalStore>(context);
     final BlackRockStore blackRockStore = Provider.of<BlackRockStore>(context);
     Goal goal = goalStore.goals[index];
-    blackRockStore.portfolio.positionsMap = {
-        "PMADX": 24.38,
-        "PBEAX": 333.79,
-        "SUWBX": 44.76,
-        "CATNX": 300.49,
-        "AAPL": 100.00,
-    };
-    BlackRockAPIPortfolio portfolio = BlackRockAPIPortfolio(positions:
-      {"AOGIX": 66.23, "SSBTX": 33.77,
-        "PMADX": 24.38},
-      startDate: 1546300800000,
-      calculatePerformance: true,
-      onlyMonthEndPerfChart: true
-      );
+    BlackRockAPIPortfolio portfolio = BlackRockAPIPortfolio(
+        positions: goal.positionsToFeedToAPI,
+        startDate: 1546300800000,
+        calculatePerformance: true,
+        onlyMonthEndPerfChart: true);
     blackRockStore.mainData(portfolio: portfolio);
+    blackRockStore.initialInvestment = goal.initialInvestment;
+    goal.changeFulfilled(blackRockStore.profit);
     return Scaffold(
         body: SingleChildScrollView(
       child: Column(
@@ -67,7 +60,9 @@ class GoalDetailsPage extends StatelessWidget {
                                       radius: 160,
                                       backgroundColor: Colors.white,
                                       percent: goal.fulfilled,
-                                      progressColor: Colors.red,
+                                      progressColor: goal.fulfilled == 1
+                                          ? Colors.green
+                                          : Colors.red,
                                       lineWidth: 10.0,
                                       animation: false,
                                       startAngle: 0,

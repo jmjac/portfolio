@@ -1,14 +1,17 @@
 import 'package:mobx/mobx.dart';
 import 'package:portfolio/black_rock/black_rock_api_portfolio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'investment_store.g.dart';
 
 class InvestmentStore extends _InvestmentStore with _$InvestmentStore {
-  InvestmentStore(BlackRockAPIPortfolio portfolio) : super(portfolio);
+  InvestmentStore(BlackRockAPIPortfolio portfolio, SharedPreferences preferences) : super(portfolio, preferences);
 }
 
 abstract class _InvestmentStore with Store {
-  _InvestmentStore(this.portfolio);
+  _InvestmentStore(this.portfolio, this._preferences);
+
+  SharedPreferences _preferences;
 
   BlackRockAPIPortfolio portfolio = BlackRockAPIPortfolio(
       positions: {"AOGIX": 66.23, "SSBTX": 33.77},
@@ -31,5 +34,11 @@ abstract class _InvestmentStore with Store {
       monthChange = returnsMap[date]["oneMonth"] * initialInvestment;
       totalGain = returnsMap[date]["level"] * initialInvestment;
     }
+  }
+
+  @action
+  void loadGeneralPortfolio(){
+//    portfolio = _preferences.getString("portfolio");
+//
   }
 }

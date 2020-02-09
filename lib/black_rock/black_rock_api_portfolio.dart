@@ -17,7 +17,6 @@ class BlackRockAPIPortfolio {
   bool onlyMonthEndPerfChart;
   int startDate;
 
-
   BlackRockAPIPortfolio(
       {Map<String, double> positions,
       bool calculateExposures,
@@ -39,6 +38,7 @@ class BlackRockAPIPortfolio {
   }
 
   void _buildBaseUrl() {
+    _baseUrl = "https://www.blackrock.com/tools/hackathon/portfolio-analysis?";
     if (calculateExposures != null) {
       _addCalculateExposures(calculateExposures);
     }
@@ -71,7 +71,6 @@ class BlackRockAPIPortfolio {
       _baseUrl += _addPositionsParameted(positionsMap);
       this.positionsMap = positionsMap;
     }
-
   }
 
   void changePositions(Map<String, double> positions) {
@@ -120,7 +119,7 @@ class BlackRockAPIPortfolio {
     _baseUrl += "onlyMonthEndPerfChart=$value";
   }
 
-    void _addStartDate(int value) {
+  void _addStartDate(int value) {
     _baseUrl += _baseUrl.endsWith("?") ? "" : "&";
     _baseUrl += "startDate=$value";
   }
@@ -129,7 +128,7 @@ class BlackRockAPIPortfolio {
     _buildBaseUrl();
     var client = http.Client();
     var response = await client.get(_baseUrl);
-    var resultMap = json.decode(response.body)["resultMap"];
+    var resultMap = await json.decode(response.body)["resultMap"];
 
     return resultMap["PORTFOLIOS"][0]["portfolios"];
   }
@@ -146,8 +145,7 @@ class BlackRockAPIPortfolio {
 
   Future<List<dynamic>> getPerfChart() async {
     Map<String, dynamic> portfolio = await getPortfolio();
+    print(_baseUrl);
     return portfolio["returns"]["performanceChart"];
   }
-
-
 }

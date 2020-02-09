@@ -16,21 +16,21 @@ abstract class _BlackRockStore with Store {
 
   @observable
   BlackRockAPIPortfolio portfolio = BlackRockAPIPortfolio(
-      positions: {
-        "PMADX": 24.38,
-        "PBEAX": 333.79,
-        "SUWBX": 44.76,
-        "CATNX": 300.49,
-        "AAPL": 100.00,
-      },
-      // startDate: 1546300800000,
-      // calculatePerformance: true,
-      // onlyMonthEndPerfChart: true);
+    positions: {
+      "PMADX": 24.38,
+      "PBEAX": 333.79,
+      "SUWBX": 44.76,
+      "CATNX": 300.49,
+      "AAPL": 100.00,
+    },
+    // startDate: 1546300800000,
+    // calculatePerformance: true,
+    // onlyMonthEndPerfChart: true);
   );
   BlackRockAPIPerformance performance;
 
   double initialInvestment = 1000.0;
-  
+
   final months = [
     'Jan',
     'Feb',
@@ -88,15 +88,19 @@ abstract class _BlackRockStore with Store {
   Future<void> mainData({BlackRockAPIPortfolio portfolio}) async {
     List<dynamic> perfChart = await portfolio.getPerfChart();
     List<FlSpot> perfChartData = [];
-    int initialYear = DateTime.fromMillisecondsSinceEpoch(perfChart[0][0], isUtc: true).year;
-    profit = double.parse(((perfChart[perfChart.length - 1][1] - 1) * initialInvestment).toStringAsFixed(2));
+    int initialYear =
+        DateTime.fromMillisecondsSinceEpoch(perfChart[0][0], isUtc: true).year;
+    profit = double.parse(
+        ((perfChart[perfChart.length - 1][1] - 1) * initialInvestment)
+            .toStringAsFixed(2));
 
     for (List<dynamic> pair in perfChart) {
       DateTime currDateTime =
           DateTime.fromMillisecondsSinceEpoch(pair[0], isUtc: true);
       // months since started
       int month = currDateTime.month + 12 * (currDateTime.year % initialYear);
-      perfChartData.add(FlSpot(month.toDouble(), double.parse((pair[1] * initialInvestment).toStringAsFixed(2))));
+      perfChartData.add(FlSpot(month.toDouble(),
+          double.parse((pair[1] * initialInvestment).toStringAsFixed(2))));
     }
 
     LineChartBarData liveData = LineChartBarData(
@@ -115,30 +119,28 @@ abstract class _BlackRockStore with Store {
     );
 
     lineChartData = LineChartData(
-      lineTouchData: LineTouchData(
-        touchTooltipData: LineTouchTooltipData(
-          getTooltipItems: (touchedSpots) {
-            if (touchedSpots == null) {
-              return null;
-            }
-            return touchedSpots.map((LineBarSpot touchedSpot) {
-              if (touchedSpot == null) {
-                return null;
-              }
-              final TextStyle textStyle = TextStyle(
-                color: touchedSpot.bar.colors[0],
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              );
-              return LineTooltipItem('\$${touchedSpot.y} \n +\$${double.parse((touchedSpot.y - initialInvestment).toStringAsExponential(2))}', textStyle);
-            }).toList();
-            
+      lineTouchData: LineTouchData(touchTooltipData:
+          LineTouchTooltipData(getTooltipItems: (touchedSpots) {
+        if (touchedSpots == null) {
+          return null;
+        }
+        return touchedSpots.map((LineBarSpot touchedSpot) {
+          if (touchedSpot == null) {
+            return null;
           }
-        )
-      ),
+          final TextStyle textStyle = TextStyle(
+            color: touchedSpot.bar.colors[0],
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          );
+          return LineTooltipItem(
+              '\$${touchedSpot.y} \n +\$${double.parse((touchedSpot.y - initialInvestment).toStringAsExponential(2))}',
+              textStyle);
+        }).toList();
+      })),
       gridData: FlGridData(
         verticalInterval: 1,
-        horizontalInterval: 200,
+        horizontalInterval: profit / 10,
         show: true,
         drawVerticalLine: true,
         getDrawingHorizontalLine: (value) {
@@ -164,9 +166,12 @@ abstract class _BlackRockStore with Store {
               fontWeight: FontWeight.bold,
               fontSize: 8),
           getTitles: (value) {
-            if (value.floor().toInt()%12 == 1 || value.floor().toInt()%12 == 6) {
+            if (value.floor().toInt() % 12 == 1 ||
+                value.floor().toInt() % 12 == 6) {
               // Formats the titles in the form m/yyyy
-              return (value.toInt()%12).toString() + '/' + (initialYear + value.toInt()~/12).toString();
+              return (value.toInt() % 12).toString() +
+                  '/' +
+                  (initialYear + value.toInt() ~/ 12).toString();
             }
             return '';
           },
@@ -180,7 +185,7 @@ abstract class _BlackRockStore with Store {
             fontSize: 8,
           ),
           getTitles: (value) {
-            if (value%200 == 0) {
+            if (value % (profit / 10) == 0) {
               return "\$" + value.toInt().toString();
             }
             return '';

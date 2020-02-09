@@ -49,4 +49,17 @@ mixin _$InvestmentStore on _InvestmentStore, Store {
   Future<void> calculateChange() {
     return _$calculateChangeAsyncAction.run(() => super.calculateChange());
   }
+
+  final _$_InvestmentStoreActionController =
+      ActionController(name: '_InvestmentStore');
+
+  @override
+  void loadGeneralPortfolio() {
+    final _$actionInfo = _$_InvestmentStoreActionController.startAction();
+    try {
+      return super.loadGeneralPortfolio();
+    } finally {
+      _$_InvestmentStoreActionController.endAction(_$actionInfo);
+    }
+  }
 }

@@ -15,7 +15,8 @@ class Goal {
       this.icon,
       this.positions,
       this.positionsInvestment}) {
-    fulfilled = initialInvestment / goalPrice;
+    currentValue = initialInvestment;
+    fulfilled = currentValue / goalPrice;
     if (fulfilled > 1) {
       fulfilled = 1;
     }
@@ -30,11 +31,23 @@ class Goal {
   String description;
   double goalPrice;
   double initialInvestment;
+  double currentValue;
   double fulfilled;
   int icon;
   List<String> positions;
   List<double> positionsInvestment;
   Map<String, double> positionsToFeedToAPI = {};
+
+  void changeFulfilled(double gain) {
+    if (currentValue == null) {
+      currentValue = initialInvestment;
+    }
+    currentValue += gain;
+    fulfilled = (currentValue) / goalPrice;
+    if (fulfilled > 1) {
+      fulfilled = 1;
+    }
+  }
 
   factory Goal.fromJson(Map<String, dynamic> json) => _$GoalFromJson(json);
 

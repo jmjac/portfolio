@@ -9,6 +9,23 @@ part of 'black_rock.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$BlackRockStore on _BlackRockStore, Store {
+  final _$portfolioAtom = Atom(name: '_BlackRockStore.portfolio');
+
+  @override
+  BlackRockAPIPortfolio get portfolio {
+    _$portfolioAtom.context.enforceReadPolicy(_$portfolioAtom);
+    _$portfolioAtom.reportObserved();
+    return super.portfolio;
+  }
+
+  @override
+  set portfolio(BlackRockAPIPortfolio value) {
+    _$portfolioAtom.context.conditionallyRunInAction(() {
+      super.portfolio = value;
+      _$portfolioAtom.reportChanged();
+    }, _$portfolioAtom, name: '${_$portfolioAtom.name}_set');
+  }
+
   final _$profitAtom = Atom(name: '_BlackRockStore.profit');
 
   @override
@@ -80,7 +97,8 @@ mixin _$BlackRockStore on _BlackRockStore, Store {
   final _$mainDataAsyncAction = AsyncAction('mainData');
 
   @override
-  Future<void> mainData() {
-    return _$mainDataAsyncAction.run(() => super.mainData());
+  Future<void> mainData({BlackRockAPIPortfolio portfolio}) {
+    return _$mainDataAsyncAction
+        .run(() => super.mainData(portfolio: portfolio));
   }
 }

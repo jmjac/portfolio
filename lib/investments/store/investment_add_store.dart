@@ -9,7 +9,7 @@ class InvestmentAddStore extends _InvestmentAddStore with _$InvestmentAddStore {
 abstract class _InvestmentAddStore with Store {
   final Map<String, String> companyMap = {
     "BLK": "BlackRock, Inc.",
-    "APPL": "Apple Inc",
+    "AAPL": "Apple Inc",
     "SPY": "S&P 500 Stock Market Index (ETF)",
     "VT": "Vanguard Total World Stock ETF",
     "QQQ": "Invesco QQQ Trust ETF",
