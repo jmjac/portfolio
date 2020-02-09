@@ -43,7 +43,7 @@ class Goal {
       currentValue = initialInvestment;
     }
     currentValue += gain;
-    fulfilled = (currentValue) / goalPrice;
+    fulfilled = (initialInvestment + gain) / goalPrice;
     if (fulfilled > 1) {
       fulfilled = 1;
     }

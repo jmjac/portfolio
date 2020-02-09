@@ -202,8 +202,8 @@ abstract class _BlackRockStore with Store {
           border: Border.all(color: const Color(0xff37434d), width: 1)),
       // minX: 0,
       // maxX: 24,
-      minY: 0,
-      maxY: initialInvestment * 2,
+      minY: initialInvestment / 4,
+      maxY: profit + initialInvestment,
       lineBarsData: [liveData],
     );
   }

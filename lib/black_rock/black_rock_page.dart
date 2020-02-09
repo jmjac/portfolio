@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:portfolio/black_rock/store/black_rock.dart';
 import 'package:charts_flutter/flutter.dart' as Charts;
@@ -25,7 +26,7 @@ class BlackRockPage extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Center(
-              child: Column(children: [
+              child: Column(crossAxisAlignment: CrossAxisAlignment.center,children: [
             SizedBox(
               height: 250,
               width: 250,
@@ -44,7 +45,7 @@ class BlackRockPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(
                       right: 18.0, left: 2, top: 24, bottom: 12),
-                  child: Text("\$${investmentStore.monthChange} gained this month", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+                  child: Text("\$${investmentStore.monthChange.toDouble().toStringAsFixed(2)} gained this month", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
                 Text("Your Earnings", style: TextStyle(fontSize: 40, fontWeight: FontWeight.w800)),
                 Padding(
                   padding: const EdgeInsets.only(
@@ -53,9 +54,9 @@ class BlackRockPage extends StatelessWidget {
                     blackRockStore.lineChartData,
                   ),
                 ),
-                Text("In total, you've earned \$" + "${blackRockStore.profit} from investing!",
+                Padding(padding: EdgeInsets.only(left:0.0),child:Text("In total, you've earned \$" + "${blackRockStore.profit} from investing!",
                     style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold))
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)))
               ])),
             )
           ])),
