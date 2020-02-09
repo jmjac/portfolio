@@ -12,7 +12,7 @@ class BlackRockPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final BlackRockStore blackRockStore = Provider.of<BlackRockStore>(context);
     blackRockStore.loadPieChartData();
-    blackRockStore.mainData();
+    blackRockStore.mainData(portfolio: blackRockStore.portfolio);
 
     return Scaffold(
         appBar: AppBar(
@@ -37,7 +37,8 @@ class BlackRockPage extends StatelessWidget {
             Observer(
               builder: (_) => Container(
                   child: Column(children: [
-                Text("Total Profit: \$" + "${blackRockStore.profit}", style:
+                Text("Total Profit: \$" + "${blackRockStore.profit}",
+                    style:
                         TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 Padding(
                   padding: const EdgeInsets.only(

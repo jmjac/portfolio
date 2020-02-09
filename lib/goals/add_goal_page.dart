@@ -220,7 +220,7 @@ class AddGoalPage extends StatelessWidget {
         onPressed: () async {
           DateTime date = await showRoundedDatePicker(
               context: context,
-              firstDate: DateTime.fromMicrosecondsSinceEpoch(1),
+              firstDate: DateTime(DateTime.now().year - 4),
               description: "$text date of portfolio tracking",
               theme: Theme.of(context),
               initialDatePickerMode: DatePickerMode.year);
@@ -249,7 +249,7 @@ class AddGoalPage extends StatelessWidget {
               onPressed: () async {
                 DateTime date = await showRoundedDatePicker(
                     context: context,
-                    firstDate: DateTime.fromMicrosecondsSinceEpoch(1),
+                    firstDate: DateTime(DateTime.now().year - 4),
                     description: "$text date of portfolio tracking",
                     theme: Theme.of(context),
                     initialDatePickerMode: DatePickerMode.year);

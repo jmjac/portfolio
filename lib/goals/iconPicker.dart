@@ -14,7 +14,9 @@ class IconPicker extends StatelessWidget {
     Icons.restaurant,
     Icons.wb_cloudy,
     Icons.pregnant_woman,
-    Icons.card_giftcard
+    Icons.card_giftcard,
+    Icons.wc,
+    Icons.toys
     // all the icons you want to include
   ];
 
@@ -26,7 +28,10 @@ class IconPicker extends StatelessWidget {
         for (var icon in icons)
           GestureDetector(
             onTap: () => Navigator.pop(context, icon),
-            child: Icon(icon),
+            child: Icon(
+              icon,
+              size: 50,
+            ),
           )
       ],
     );

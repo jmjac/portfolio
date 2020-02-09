@@ -25,7 +25,7 @@ Future<void> main() async {
   final SharedPreferences _preferences = await SharedPreferences.getInstance();
 
   BlackRockAPIPortfolio portfolio = BlackRockAPIPortfolio(
-      positions: {"AOGIX": 66.23, "SSBTX": 33.77},
+      positions: {},
       startDate: 1546300800000,
       calculatePerformance: true,
       onlyMonthEndPerfChart: true);
