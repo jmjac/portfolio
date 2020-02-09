@@ -14,6 +14,7 @@ class BlackRockStore extends _BlackRockStore with _$BlackRockStore {
 abstract class _BlackRockStore with Store {
   _BlackRockStore(this.portfolio);
 
+  @observable
   BlackRockAPIPortfolio portfolio = BlackRockAPIPortfolio(
       positions: {
         "PMADX": 24.38,
@@ -84,7 +85,7 @@ abstract class _BlackRockStore with Store {
   ];
 
   @action
-  Future<void> mainData() async {
+  Future<void> mainData({BlackRockAPIPortfolio portfolio}) async {
     List<dynamic> perfChart = await portfolio.getPerfChart();
     List<FlSpot> perfChartData = [];
     int initialYear = DateTime.fromMillisecondsSinceEpoch(perfChart[0][0], isUtc: true).year;
@@ -165,7 +166,7 @@ abstract class _BlackRockStore with Store {
           getTitles: (value) {
             if (value.floor().toInt()%12 == 1 || value.floor().toInt()%12 == 6) {
               // Formats the titles in the form m/yyyy
-              return (value.toInt()%12).toString() + '/' + (initialYear + value.floor().toInt()~/12).toString();
+              return (value.toInt()%12).toString() + '/' + (initialYear + value.toInt()~/12).toString();
             }
             return '';
           },

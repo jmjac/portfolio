@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:portfolio/black_rock/black_rock_api_portfolio.dart';
 import 'package:portfolio/goals/goal.dart';
 import 'package:portfolio/goals/store/goalStore.dart';
 import 'package:provider/provider.dart';
@@ -18,8 +19,22 @@ class GoalDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final goalStore = Provider.of<GoalStore>(context);
     final BlackRockStore blackRockStore = Provider.of<BlackRockStore>(context);
-    blackRockStore.mainData();
     Goal goal = goalStore.goals[index];
+    blackRockStore.portfolio.positionsMap = {
+        "PMADX": 24.38,
+        "PBEAX": 333.79,
+        "SUWBX": 44.76,
+        "CATNX": 300.49,
+        "AAPL": 100.00,
+    };
+    BlackRockAPIPortfolio portfolio = BlackRockAPIPortfolio(positions:
+      {"AOGIX": 66.23, "SSBTX": 33.77,
+        "PMADX": 24.38},
+      startDate: 1546300800000,
+      calculatePerformance: true,
+      onlyMonthEndPerfChart: true
+      );
+    blackRockStore.mainData(portfolio: portfolio);
     return Scaffold(
         body: SingleChildScrollView(
       child: Column(
