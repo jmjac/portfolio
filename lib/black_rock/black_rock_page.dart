@@ -37,8 +37,7 @@ class BlackRockPage extends StatelessWidget {
             Observer(
               builder: (_) => Container(
                   child: Column(children: [
-                Text("Total Profit: \$" + blackRockStore.profit.toString(),
-                    style:
+                Text("Total Profit: \$" + "${blackRockStore.profit}", style:
                         TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 Padding(
                   padding: const EdgeInsets.only(

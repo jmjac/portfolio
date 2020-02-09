@@ -19,6 +19,19 @@ class AddGoalPage extends StatelessWidget {
     final goalStore = Provider.of<GoalStore>(context);
     final goalFormStore = Provider.of<GoalFormStore>(context);
     final BlackRockStore blackRockStore = Provider.of<BlackRockStore>(context);
+    final Map<String, String> tickerStockData = {
+      "BLK": "BlackRock, Inc.",
+      "APPL": "Apple Inc",
+      "SPY": "S&P 500 Stock Market Index (ETF)",
+      "VT": "Vanguard Total World Stock ETF",
+      "QQQ": "Invesco QQQ Trust ETF",
+      "MSFT": "Microsoft Corporation",
+      "FB": "Facebook, Inc.",
+      "JPM": "JPMorgan Chase & Co.",
+      "MCD": "Mcdonald's Corporation",
+      "WMT": "Walmart Inc.",
+      "XLP": "Consumer Staples Select Sect ETF"
+    };
 
     return Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
