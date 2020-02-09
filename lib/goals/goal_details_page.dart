@@ -30,7 +30,9 @@ class GoalDetailsPage extends StatelessWidget {
                       Padding(
                           padding: EdgeInsets.only(top: 32.0, bottom: 8.0),
                           child: Text(
-                            "${goal.name}",
+                            goal.name.length < 17
+                                ? "${goal.name}"
+                                : "${goal.name.substring(0, 15)}...",
                             style: TextStyle(
                                 fontSize: 48, fontWeight: FontWeight.bold),
                           )),

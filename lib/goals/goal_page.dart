@@ -91,7 +91,8 @@ class GoalPage extends StatelessWidget {
             },
           )),
       Text(
-        "${goal.name}",
+        goal.name.length < 20 ? "${goal.name}" : "${goal.name.substring(0,18
+        )}...",
         style: TextStyle(fontSize: 18),
       )
     ]);
