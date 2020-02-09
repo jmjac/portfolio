@@ -140,11 +140,6 @@ class AddGoalPage extends StatelessWidget {
                                                 goalFormStore.changePositions(
                                                     blackRockStore.portfolio
                                                         .positionsNames[index],
-                                                    blackRockStore.portfolio
-                                                            .positionsMap[
-                                                        blackRockStore.portfolio
-                                                                .positionsNames[
-                                                            index]],
                                                     index);
                                               },
                                               value: (goalFormStore.positions
@@ -184,7 +179,8 @@ class AddGoalPage extends StatelessWidget {
                       style: TextStyle(fontSize: 20),
                     ),
                     onPressed: () {
-                      bool success = goalFormStore.validateAndSubmit(goalStore);
+                      bool success = goalFormStore.validateAndSubmit(
+                          goalStore, blackRockStore);
                       if (success) {
                         Navigator.pop(context);
                       }

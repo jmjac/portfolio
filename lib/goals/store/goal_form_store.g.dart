@@ -272,21 +272,20 @@ mixin _$GoalFormStore on _GoalFormStore, Store {
   }
 
   @override
-  void changePositions(
-      String position, double percentageInvestment, int index) {
+  void changePositions(String position, int index) {
     final _$actionInfo = _$_GoalFormStoreActionController.startAction();
     try {
-      return super.changePositions(position, percentageInvestment, index);
+      return super.changePositions(position, index);
     } finally {
       _$_GoalFormStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  bool validateAndSubmit(GoalStore goalStore) {
+  bool validateAndSubmit(GoalStore goalStore, BlackRockStore blackRockStore) {
     final _$actionInfo = _$_GoalFormStoreActionController.startAction();
     try {
-      return super.validateAndSubmit(goalStore);
+      return super.validateAndSubmit(goalStore, blackRockStore);
     } finally {
       _$_GoalFormStoreActionController.endAction(_$actionInfo);
     }

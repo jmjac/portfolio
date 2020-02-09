@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:portfolio/black_rock/store/black_rock.dart';
 
 import '../goal.dart';
 import 'goalStore.dart';
@@ -73,26 +74,27 @@ abstract class _GoalFormStore with Store {
   }
 
   @action
-  void changePositions(
-      String position, double percentageInvestment, int index) {
+  void changePositions(String position, int index) {
     if (positions.contains(position)) {
-      int investmentIndex = positions.indexOf(position);
-      positionsInvestment.removeAt(investmentIndex);
+      positions.remove(position);
     } else {
       positions.add(position);
-      positionsInvestment.add(percentageInvestment);
     }
     positionsFollowed[index] = !positionsFollowed[index];
     flipTest();
   }
 
   @action
-  bool validateAndSubmit(GoalStore goalStore) {
+  bool validateAndSubmit(GoalStore goalStore, BlackRockStore blackRockStore) {
     if (positions.isNotEmpty &&
         name != null &&
         name.isNotEmpty &&
         goalPrice != null &&
         initialInvestment != null) {
+      for (String position in positions) {
+        positionsInvestment
+            .add(blackRockStore.portfolio.positionsMap[position]);
+      }
       goalStore.addGoal(Goal(
           initialInvestment: initialInvestment,
           icon: Icons.card_giftcard.codePoint,
@@ -110,14 +112,12 @@ abstract class _GoalFormStore with Store {
       name = null;
       startDate = null;
       endDate = null;
-      positionsFollowed =
-          ObservableList.of(List.filled(15, false));
+      positionsFollowed = ObservableList.of(List.filled(15, false));
       goalPrice = null;
       initialInvestment = null;
       description = null;
       error = null;
       return true;
-
     } else {
       error = "Please fill in all required fields";
     }
