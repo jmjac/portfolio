@@ -41,7 +41,7 @@ class GoalDetailsPage extends StatelessWidget {
                                 ? "${goal.name}"
                                 : "${goal.name.substring(0, 15)}...",
                             style: TextStyle(
-                                fontSize: 48, fontWeight: FontWeight.bold),
+                                fontSize: 38, fontWeight: FontWeight.bold),
                           )),
                       Observer(
                           builder: (_) => Hero(
@@ -69,8 +69,8 @@ class GoalDetailsPage extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              coveredBy("Initial investement", Colors.red),
-                              coveredBy("Investements gains", Colors.pink),
+                              coveredBy("Initial investment", Colors.red),
+                              coveredBy("Investments gains", Colors.pink),
                               coveredBy("Left", Colors.white)
                             ],
                           )),
@@ -78,7 +78,7 @@ class GoalDetailsPage extends StatelessWidget {
                   ),
                 ),
               )),
-          Padding(padding: EdgeInsets.all(16.0)),
+          // Padding(padding: EdgeInsets.all(8.0)),
           Text("${goal.description}"),
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             Text(
@@ -118,7 +118,7 @@ class GoalDetailsPage extends StatelessWidget {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               Padding(
                 padding: const EdgeInsets.only(
-                    right: 18.0, left: 2, top: 24, bottom: 12),
+                    right: 18.0, left: 2, top: 8, bottom: 12),
                 child: flCharts.LineChart(
                   blackRockStore.lineChartData,
                 ),
@@ -126,7 +126,7 @@ class GoalDetailsPage extends StatelessWidget {
             ])),
           )),
           Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(8.0),
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             SizedBox(
