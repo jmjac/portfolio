@@ -32,13 +32,13 @@ class InvestmentPage extends StatelessWidget {
                         builder: (_) => Padding(
                             padding: EdgeInsets.only(top: 51.0),
                             child: Text(
-                                "\$${investmentStore.initialInvestment.toStringAsFixed(2)}",
-                                style: TextStyle(fontSize: 48))),
+                                "\$${investmentStore.monthChange.toStringAsFixed(2)} this month",
+                                style: TextStyle(fontSize: 35))),
                       ),
-                      Observer(
-                        builder: (_) => Text(
-                            "\$${investmentStore.monthChange.toStringAsFixed(2)} this month"),
-                      ),
+                      // Observer(
+                      //   builder: (_) => Text(
+                      //       "\$${investmentStore.monthChange.toStringAsFixed(2)} this month"),
+                      // ),
                       Padding(
                           padding: EdgeInsets.only(top: 40.0),
                           child: SizedBox(

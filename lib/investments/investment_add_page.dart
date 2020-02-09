@@ -16,7 +16,6 @@ class InvestmentAddPage extends StatelessWidget {
         final InvestmentStore investmentStore =
         Provider.of<InvestmentStore>(context);
     final BlackRockStore blackRockStore = Provider.of<BlackRockStore>(context);
-
     return Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
