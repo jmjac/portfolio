@@ -21,7 +21,8 @@ class GoalDetailsPage extends StatelessWidget {
     blackRockStore.mainData();
     Goal goal = goalStore.goals[index];
     return Scaffold(
-      body: Column(
+        body: SingleChildScrollView(
+      child: Column(
         children: <Widget>[
           Container(
               decoration:
@@ -163,7 +164,7 @@ class GoalDetailsPage extends StatelessWidget {
           ])
         ],
       ),
-    );
+    ));
   }
 
   Widget coveredBy(String text, Color color) {
