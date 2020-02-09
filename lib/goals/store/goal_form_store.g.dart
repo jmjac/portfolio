@@ -146,6 +146,24 @@ mixin _$GoalFormStore on _GoalFormStore, Store {
     }, _$positionsAtom, name: '${_$positionsAtom.name}_set');
   }
 
+  final _$positionsFollowedAtom =
+      Atom(name: '_GoalFormStore.positionsFollowed');
+
+  @override
+  ObservableList<bool> get positionsFollowed {
+    _$positionsFollowedAtom.context.enforceReadPolicy(_$positionsFollowedAtom);
+    _$positionsFollowedAtom.reportObserved();
+    return super.positionsFollowed;
+  }
+
+  @override
+  set positionsFollowed(ObservableList<bool> value) {
+    _$positionsFollowedAtom.context.conditionallyRunInAction(() {
+      super.positionsFollowed = value;
+      _$positionsFollowedAtom.reportChanged();
+    }, _$positionsFollowedAtom, name: '${_$positionsFollowedAtom.name}_set');
+  }
+
   final _$errorAtom = Atom(name: '_GoalFormStore.error');
 
   @override
@@ -237,10 +255,10 @@ mixin _$GoalFormStore on _GoalFormStore, Store {
   }
 
   @override
-  void changePositions(String position) {
+  void changePositions(String position, int index) {
     final _$actionInfo = _$_GoalFormStoreActionController.startAction();
     try {
-      return super.changePositions(position);
+      return super.changePositions(position, index);
     } finally {
       _$_GoalFormStoreActionController.endAction(_$actionInfo);
     }

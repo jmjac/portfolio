@@ -136,7 +136,8 @@ class AddGoalPage extends StatelessWidget {
                                           onChanged: (bool value) {
                                             goalFormStore.changePositions(
                                                 blackRockStore.portfolio
-                                                    .positionsNames[index]);
+                                                    .positionsNames[index],
+                                                index);
                                           },
                                           value: (goalFormStore.positions
                                               .contains(blackRockStore.portfolio

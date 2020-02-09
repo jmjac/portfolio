@@ -26,6 +26,10 @@ abstract class _GoalFormStore with Store {
   @observable
   List<String> positions = [];
   @observable
+  ObservableList<bool> positionsFollowed =
+      ObservableList.of(List.filled(15, false));
+
+  @observable
   String error;
 
   @action
@@ -64,12 +68,13 @@ abstract class _GoalFormStore with Store {
   }
 
   @action
-  void changePositions(String position) {
+  void changePositions(String position, int index) {
     if (positions.contains(position)) {
       positions.remove(position);
     } else {
       positions.add(position);
     }
+    positionsFollowed[index] = !positionsFollowed[index];
   }
 
   @action
@@ -91,7 +96,7 @@ abstract class _GoalFormStore with Store {
           goalPrice: goalPrice,
           name: name));
       return true;
-    }else{
+    } else {
       error = "Please fill in all required fields";
     }
     return false;
