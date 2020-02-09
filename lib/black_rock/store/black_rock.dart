@@ -76,7 +76,7 @@ abstract class _BlackRockStore with Store {
           DateTime.fromMillisecondsSinceEpoch(pair[0], isUtc: true);
       // months since started
       int month = currDateTime.month + 12 * (currDateTime.year % initialYear);
-      perfChartData.add(FlSpot(month.toDouble(), pair[1] * initialInvestment));
+      perfChartData.add(FlSpot(month.toDouble(), double.parse((pair[1] * initialInvestment).toStringAsFixed(2))));
     }
 
     LineChartBarData liveData = LineChartBarData(
@@ -90,7 +90,7 @@ abstract class _BlackRockStore with Store {
       ),
       belowBarData: BarAreaData(
         show: true,
-        colors: gradientColors.map((color) => color.withOpacity(0.7)).toList(),
+        colors: gradientColors.map((color) => color.withOpacity(0.5)).toList(),
       ),
     );
 
@@ -103,13 +103,13 @@ abstract class _BlackRockStore with Store {
         getDrawingHorizontalLine: (value) {
           return const FlLine(
             color: Colors.red,
-            strokeWidth: .2,
+            strokeWidth: .5,
           );
         },
         getDrawingVerticalLine: (value) {
           return const FlLine(
             color: Colors.red,
-            strokeWidth: .2,
+            strokeWidth: .5,
           );
         },
       ),
@@ -123,9 +123,9 @@ abstract class _BlackRockStore with Store {
               fontWeight: FontWeight.bold,
               fontSize: 8),
           getTitles: (value) {
-            if (value.toInt()%12 == 1 || value.toInt()%12 == 6 || value.toInt()%12 == 0) {
+            if (value.floor().toInt()%12 == 1 || value.floor().toInt()%12 == 6) {
               // Formats the titles in the form m/yyyy
-              return value.toString() + '/' + (initialYear + value.toInt()%12).toString();
+              return (value.toInt()%12).toString() + '/' + (initialYear + value.floor().toInt()~/12).toString();
             }
             return '';
           },
