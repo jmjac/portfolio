@@ -46,6 +46,9 @@ abstract class _BlackRockStore with Store {
   ];
 
   @observable
+  double profit = 0;
+
+  @observable
   double monthChange = 0;
 
   @observable
@@ -85,6 +88,7 @@ abstract class _BlackRockStore with Store {
     List<dynamic> perfChart = await portfolio.getPerfChart();
     List<FlSpot> perfChartData = [];
     int initialYear = DateTime.fromMillisecondsSinceEpoch(perfChart[0][0], isUtc: true).year;
+    profit = double.parse(((perfChart[perfChart.length - 1][1] - 1) * initialInvestment).toStringAsFixed(2));
 
     for (List<dynamic> pair in perfChart) {
       DateTime currDateTime =

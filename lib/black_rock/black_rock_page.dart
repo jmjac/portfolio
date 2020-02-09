@@ -17,16 +17,6 @@ class BlackRockPage extends StatelessWidget {
     return Scaffold(
       body: Center(
           child: Column(children: [
-        Text("Portfolio"),
-//        SizedBox(
-//          height: 200,
-//          width: 200,
-//          child: Observer(
-//              builder: (_) => Charts.TimeSeriesChart(
-//                    blackRockStore.seriesPerMonth,
-//                    animate: true,
-//                  )),
-//        ),
         SizedBox(
           height: 250,
           width: 250,
@@ -39,13 +29,20 @@ class BlackRockPage extends StatelessWidget {
         ),
         Observer(
           builder: (_) => Container(
-              child: Padding(
-            padding: const EdgeInsets.only(
-                right: 18.0, left: 12.0, top: 24, bottom: 12),
-            child: flCharts.LineChart(
-              blackRockStore.lineChartData,
-            ),
-          )),
+              child: Column(children: [
+                    Text("Total Profit: \$" + blackRockStore.profit.toString(), style:
+                      TextStyle(fontSize: 20,
+                        fontWeight: FontWeight.bold
+                      )
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        right: 18.0, left: 2, top: 24, bottom: 12),
+                    child: flCharts.LineChart(
+                      blackRockStore.lineChartData,
+                    ),
+                  )
+              ])),
         )
       ])),
     );
