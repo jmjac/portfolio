@@ -76,4 +76,19 @@ mixin _$BlackRockStore on _BlackRockStore, Store {
       _$lineChartDataAtom.reportChanged();
     }, _$lineChartDataAtom, name: '${_$lineChartDataAtom.name}_set');
   }
+
+  final _$loadLinearGraphDataAsyncAction = AsyncAction('loadLinearGraphData');
+
+  @override
+  Future<void> loadLinearGraphData() {
+    return _$loadLinearGraphDataAsyncAction
+        .run(() => super.loadLinearGraphData());
+  }
+
+  final _$mainDataAsyncAction = AsyncAction('mainData');
+
+  @override
+  Future<void> mainData() {
+    return _$mainDataAsyncAction.run(() => super.mainData());
+  }
 }
