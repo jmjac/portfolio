@@ -12,6 +12,7 @@ import 'package:portfolio/goals/store/goalStore.dart';
 import 'package:portfolio/goals/store/goal_form_store.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:portfolio/goals/iconPicker.dart';
 
 class AddGoalPage extends StatelessWidget {
   @override
@@ -58,7 +59,16 @@ class AddGoalPage extends StatelessWidget {
                         size: 100,
                         color: Colors.black26,
                       ),
-                      onTap: () {},
+                      onTap: () async{
+                        IconData pickedIcon = await showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                                title: Text("Choose Icon"),
+                                content: IconPicker()));
+                          if(pickedIcon != null){
+                            goalFormStore.setIcon(pickedIcon.codePoint);
+                          }
+                      },
                     ))),
             Padding(
               padding: EdgeInsets.all(8.0),
@@ -113,7 +123,7 @@ class AddGoalPage extends StatelessWidget {
                                 prefix: Text("\$ "),
                                 labelText: "Goal amount*",
                                 hintText:
-                                    "Amount of money need to achive the goal"),
+                                    "Amount of money need to achieve the goal"),
                             onChanged: (String value) =>
                                 goalFormStore.setGoalPrice(double.parse(value)),
                             keyboardType: TextInputType.number,

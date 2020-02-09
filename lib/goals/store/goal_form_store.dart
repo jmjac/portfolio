@@ -97,7 +97,7 @@ abstract class _GoalFormStore with Store {
       }
       goalStore.addGoal(Goal(
           initialInvestment: initialInvestment,
-          icon: Icons.card_giftcard.codePoint,
+          icon: icon != null ? icon : Icons.panorama_fish_eye,
           description: description != null ? description : "",
           positions: positions,
           startDate: startDate != null ? startDate : 0,

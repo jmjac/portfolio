@@ -18,7 +18,7 @@ class InvestmentAddPage extends StatelessWidget {
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           title: Text(
-            "Add new investement",
+            "Add New Investment",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
           ),
           centerTitle: true,
@@ -41,13 +41,13 @@ class InvestmentAddPage extends StatelessWidget {
                       child: TextFormField(
                         decoration: InputDecoration(
                             hintText:
-                                "Abbriviation used to identify the comapny e.g APPL"),
+                                "Abbriviation used to identify the company e.g APPL"),
                         onChanged: (String value) => investmentAddStore
                             .setCompanyTicker(value.toUpperCase()),
                       ))),
               Padding(
                 padding: EdgeInsets.only(top: 16.0, left: 12, bottom: 8.0),
-                child: Text("COMAPNY NAME:"),
+                child: Text("COMPANY NAME:"),
               ),
               SizedBox(
                   width: 600,
@@ -69,7 +69,7 @@ class InvestmentAddPage extends StatelessWidget {
                   child: TextFormField(
                       decoration: InputDecoration(
                           prefix: Text("\$ "),
-                          labelText: "The price of the stock",
+                          labelText: "Money Invested",
                           hintText: "Initial amount of money invested"),
                       keyboardType: TextInputType.number,
                       onChanged: (String value) =>
@@ -83,9 +83,9 @@ class InvestmentAddPage extends StatelessWidget {
                   child: TextFormField(
                       decoration: InputDecoration(
                           prefix: Text("\% "),
-                          labelText: "Quantity purchased",
+                          labelText: "% Portfolio Purchased",
                           hintText:
-                              "How big part of your portfolio is this new stock"),
+                              "What percent of your portfolio is this new purchase?"),
                       keyboardType: TextInputType.number,
                       onChanged: (String value) => investmentAddStore.setPercentage(double.parse(value)),
                       inputFormatters: <TextInputFormatter>[
