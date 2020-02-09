@@ -107,22 +107,22 @@ class GoalDetailsPage extends StatelessWidget {
           ]),
           SizedBox(
             child: Observer(
-          builder: (_) => Container(
-              child: Column(children: [
-                    Text("Total Profit: \$" + blackRockStore.profit.toString(), style:
-                      TextStyle(fontSize: 20,
-                        fontWeight: FontWeight.bold
+              builder: (_) => Container(
+                  child: Column(children: [
+                        Text("Total Profit: \$" + blackRockStore.profit.toString(), style:
+                          TextStyle(fontSize: 20,
+                            fontWeight: FontWeight.bold
+                          )
+                        ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: 18.0, left: 2, top: 24, bottom: 12),
+                        child: flCharts.LineChart(
+                          blackRockStore.lineChartData,
+                        ),
                       )
-                    ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        right: 18.0, left: 2, top: 24, bottom: 12),
-                    child: flCharts.LineChart(
-                      blackRockStore.lineChartData,
-                    ),
-                  )
-              ])),
-        )),
+                  ])),
+            )),
           Padding(
             padding: EdgeInsets.all(16.0),
           ),
