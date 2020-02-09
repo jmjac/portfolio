@@ -85,19 +85,19 @@ class AddGoalPage extends StatelessWidget {
                           labelText: 'Goal name*',
                           hintText: 'Your goal name',
                         )))),
-            Container(
-                color: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Observer(
-                    builder: (_) => TextFormField(
-                        style: TextStyle(color: Colors.black),
-                        onChanged: (String value) =>
-                            goalFormStore.setName(value),
-                        maxLines: 2,
-                        decoration: InputDecoration(
-                          labelText: 'Description',
-                          hintText: 'Description, notes etc.',
-                        )))),
+            // Container(
+            //     color: Colors.white,
+            //     padding: EdgeInsets.symmetric(horizontal: 10),
+            //     child: Observer(
+            //         builder: (_) => TextFormField(
+            //             style: TextStyle(color: Colors.black),
+            //             onChanged: (String value) =>
+            //                 goalFormStore.setName(value),
+            //             maxLines: 2,
+            //             decoration: InputDecoration(
+            //               labelText: 'Description',
+            //               hintText: 'Description, notes etc.',
+            //             )))),
             Container(
                 color: Colors.white,
                 padding: EdgeInsets.symmetric(horizontal: 10),

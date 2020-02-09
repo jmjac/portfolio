@@ -83,7 +83,7 @@ class GoalDetailsPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               coveredBy("Initial investment", Colors.red),
-                              coveredBy("Investments gains", Colors.pink),
+                              coveredBy("Investments gains", Colors.pink[200]),
                               coveredBy("Left", Colors.white)
                             ],
                           )),
