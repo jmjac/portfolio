@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:portfolio/goals/store/goalStore.dart';
@@ -60,10 +61,14 @@ class AddGoalPage extends StatelessWidget {
                 child: Observer(
                     builder: (_) =>TextFormField(
                         style: TextStyle(color: Colors.black),
+                        maxLines: 5,
                         decoration: InputDecoration(
                           labelText: 'Description',
                           hintText: 'Description, notes etc.',
-                        ))))
+                        )))),
+
+            Padding(padding: EdgeInsets.all(8.0),),
+
           ],
         ));
   }

@@ -46,8 +46,12 @@ abstract class _GoalStore with Store {
   }
 
   void loadGoals() async {
-    List<dynamic> json = await jsonDecode(_preferences.getString("goals"));
-    goals = ObservableList.of(json.map((task) => Goal.fromJson(task)));
+    try {
+      List<dynamic> json = await jsonDecode(_preferences?.getString("goals"));
+      goals = ObservableList.of(json.map((task) => Goal.fromJson(task)));
+    } catch (_) {
+      goals = null;
+    }
     if (goals == null) {
       goals = ObservableList.of([addNewGoalButton]);
     }

@@ -28,7 +28,6 @@ class RootPage extends StatelessWidget {
           authentication.disposeReactions();
           authentication.error.clear();
           return HomePage();
-          return HomePage();
           break;
         default:
           return WaitingPage();
