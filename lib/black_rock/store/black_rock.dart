@@ -20,13 +20,13 @@ abstract class _BlackRockStore with Store {
     "SUWBX": 44.76,
     "CATNX": 300.49,
     "AAPL": 100.00,
-  }, startDate: 20190101,
+  }, startDate: 1546300800000,
   calculatePerformance: true,
   onlyMonthEndPerfChart: true
   );
   BlackRockAPIPerformance performance;
 
-  double initialInvestment = 10000.0;
+  double initialInvestment = 1000.0;
 
 
 
@@ -45,7 +45,8 @@ abstract class _BlackRockStore with Store {
   // Uses level from resultsMap to calculate the portfolio performance per month
   // and convert it to LineSeries to feed to graph
 
-  void loadLinearGraphData() async {
+  @action
+  Future<void> loadLinearGraphData() async {
     Map<String, dynamic> returnsMap = await portfolio.getReturnsMap();
     List<DataPoint> data = [];
     for (String date in returnsMap.keys) {
@@ -88,16 +89,31 @@ abstract class _BlackRockStore with Store {
     Colors.amber,
     ];
 
-  void mainData() async {
-    List<dynamic> returnsMap = await portfolio.getPerfChart();
+  @action
+  Future<void> mainData() async {
+    List<dynamic> perfChart = await portfolio.getPerfChart();
     List<FlSpot> perfChartData = [];
-    for (List<dynamic> pair in returnsMap) {
-      perfChartData.add(FlSpot(
-          pair[0].toDouble(), pair[1] * initialInvestment));
+    int initialYear = DateTime.fromMillisecondsSinceEpoch(perfChart[0][0], isUtc: true).year;
+
+    for (List<dynamic> pair in perfChart) {
+      DateTime currDateTime = DateTime.fromMillisecondsSinceEpoch(pair[0], isUtc: true);
+      // months since started
+      int month = currDateTime.month + 12*(currDateTime.year%initialYear);
+          perfChartData.add(FlSpot(
+          month.toDouble(), pair[1] * initialInvestment));
     }
 
     LineChartBarData liveData = LineChartBarData(
-          spots: perfChartData,
+          // spots: perfChartData,
+            spots: const [
+            FlSpot(0, 3),
+            FlSpot(2.6, 2),
+            FlSpot(4.9, 5),
+            FlSpot(6.8, 3.1),
+            FlSpot(8, 4),
+            FlSpot(9.5, 3),
+            FlSpot(11, 4),
+          ],
           isCurved: true,
           colors: gradientColors,
           barWidth: 5,
@@ -136,15 +152,12 @@ abstract class _BlackRockStore with Store {
           textStyle:
               TextStyle(color: const Color(0xff68737d), fontWeight: FontWeight.bold, fontSize: 16),
           getTitles: (value) {
-            switch (value.toInt()) {
-              case 2:
-                return 'MAR';
-              case 5:
-                return 'JUN';
-              case 8:
-                return 'SEP';
-            }
-            return '';
+            // if (value.toInt()%12 == 1 || value.toInt()%12 == 6 || value.toInt()%12 == 0) {
+            //   // Formats the titles in the form m/yyyy
+            //   return value.toString() + '/' + (initialYear + value.toInt()%12).toString();
+            // }
+            // return '';
+
           },
           margin: 8,
         ),
@@ -157,7 +170,7 @@ abstract class _BlackRockStore with Store {
           ),
           getTitles: (value) {
             switch (value.toInt()) {
-              case 1:
+              case 2:
                 return '10k';
               case 3:
                 return '30k';
@@ -173,9 +186,9 @@ abstract class _BlackRockStore with Store {
       borderData:
           FlBorderData(show: true, border: Border.all(color: const Color(0xff37434d), width: 1)),
       minX: 0,
-      maxX: 11,
+      maxX: 24,
       minY: 0,
-      maxY: 6,
+      maxY: 5000,
       lineBarsData: [
         liveData
       ],

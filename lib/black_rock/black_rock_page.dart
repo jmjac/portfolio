@@ -46,7 +46,8 @@ class BlackRockPage extends StatelessWidget {
                 color: Colors.white),
             child: Padding(
               padding: const EdgeInsets.only(right: 18.0, left: 12.0, top: 24, bottom: 12),
-              child: flCharts.LineChart(
+              child: 
+              flCharts.LineChart(
                 blackRockStore.lineChartData,
               ),
             ),
