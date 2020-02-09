@@ -25,12 +25,17 @@ abstract class _GoalFormStore with Store {
   int icon;
   @observable
   List<String> positions = [];
+
+  List<double> positionsInvestment = [];
   @observable
   ObservableList<bool> positionsFollowed =
       ObservableList.of(List.filled(15, false));
 
   @observable
   String error;
+
+  @observable
+  bool test = true;
 
   @action
   void setName(String value) {
@@ -68,13 +73,17 @@ abstract class _GoalFormStore with Store {
   }
 
   @action
-  void changePositions(String position, int index) {
+  void changePositions(
+      String position, double percentageInvestment, int index) {
     if (positions.contains(position)) {
-      positions.remove(position);
+      int investmentIndex = positions.indexOf(position);
+      positionsInvestment.removeAt(investmentIndex);
     } else {
       positions.add(position);
+      positionsInvestment.add(percentageInvestment);
     }
     positionsFollowed[index] = !positionsFollowed[index];
+    flipTest();
   }
 
   @action
@@ -89,16 +98,34 @@ abstract class _GoalFormStore with Store {
           icon: Icons.card_giftcard.codePoint,
           description: description != null ? description : "",
           positions: positions,
-          beginDate: startDate != null ? startDate : 0,
+          startDate: startDate != null ? startDate : 0,
           endDate: endDate != null
               ? endDate
               : DateTime.now().toUtc().millisecondsSinceEpoch,
           goalPrice: goalPrice,
-          name: name));
+          name: name,
+          positionsInvestment: positionsInvestment));
+      positions = [];
+      positionsInvestment = [];
+      name = null;
+      startDate = null;
+      endDate = null;
+      positionsFollowed =
+          ObservableList.of(List.filled(15, false));
+      goalPrice = null;
+      initialInvestment = null;
+      description = null;
+      error = null;
       return true;
+
     } else {
       error = "Please fill in all required fields";
     }
     return false;
+  }
+
+  @action
+  void flipTest() {
+    test = !test;
   }
 }

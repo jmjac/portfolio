@@ -15,7 +15,7 @@ abstract class _GoalStore with Store {
   final SharedPreferences _preferences;
   static Goal addNewGoalButton = Goal(
       name: "NEW GOAL",
-      beginDate: 0,
+      startDate: 0,
       goalPrice: 1,
       initialInvestment: 0,
       positions: [],

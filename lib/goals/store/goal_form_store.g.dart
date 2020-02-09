@@ -181,6 +181,23 @@ mixin _$GoalFormStore on _GoalFormStore, Store {
     }, _$errorAtom, name: '${_$errorAtom.name}_set');
   }
 
+  final _$testAtom = Atom(name: '_GoalFormStore.test');
+
+  @override
+  bool get test {
+    _$testAtom.context.enforceReadPolicy(_$testAtom);
+    _$testAtom.reportObserved();
+    return super.test;
+  }
+
+  @override
+  set test(bool value) {
+    _$testAtom.context.conditionallyRunInAction(() {
+      super.test = value;
+      _$testAtom.reportChanged();
+    }, _$testAtom, name: '${_$testAtom.name}_set');
+  }
+
   final _$_GoalFormStoreActionController =
       ActionController(name: '_GoalFormStore');
 
@@ -255,10 +272,11 @@ mixin _$GoalFormStore on _GoalFormStore, Store {
   }
 
   @override
-  void changePositions(String position, int index) {
+  void changePositions(
+      String position, double percentageInvestment, int index) {
     final _$actionInfo = _$_GoalFormStoreActionController.startAction();
     try {
-      return super.changePositions(position, index);
+      return super.changePositions(position, percentageInvestment, index);
     } finally {
       _$_GoalFormStoreActionController.endAction(_$actionInfo);
     }
@@ -269,6 +287,16 @@ mixin _$GoalFormStore on _GoalFormStore, Store {
     final _$actionInfo = _$_GoalFormStoreActionController.startAction();
     try {
       return super.validateAndSubmit(goalStore);
+    } finally {
+      _$_GoalFormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void flipTest() {
+    final _$actionInfo = _$_GoalFormStoreActionController.startAction();
+    try {
+      return super.flipTest();
     } finally {
       _$_GoalFormStoreActionController.endAction(_$actionInfo);
     }

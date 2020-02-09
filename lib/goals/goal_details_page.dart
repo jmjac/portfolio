@@ -4,9 +4,11 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:portfolio/goals/goal.dart';
 import 'package:portfolio/goals/store/goalStore.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class GoalDetailsPage extends StatelessWidget {
   int index;
+  var formatter = new DateFormat('yyyy-MM-dd');
 
   GoalDetailsPage({@required this.index});
 
@@ -44,7 +46,7 @@ class GoalDetailsPage extends StatelessWidget {
                                     child: CircularPercentIndicator(
                                       radius: 160,
                                       backgroundColor: Colors.white,
-                                      percent: goal.fullfiled,
+                                      percent: goal.fulfilled,
                                       progressColor: Colors.red,
                                       lineWidth: 10.0,
                                       animation: false,
@@ -79,7 +81,9 @@ class GoalDetailsPage extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             Text(
-              "${goal.endDate}",
+              goal.startDate != null
+                  ? "${formatter.format(DateTime.fromMillisecondsSinceEpoch(goal.startDate, isUtc: true))}"
+                  : "Release",
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.grey,
@@ -93,7 +97,7 @@ class GoalDetailsPage extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             Text(
-              "${goal.endDate}",
+              "${formatter.format(DateTime.fromMillisecondsSinceEpoch(goal.endDate, isUtc: true))}",
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.grey,

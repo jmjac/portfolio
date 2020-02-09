@@ -122,28 +122,31 @@ class AddGoalPage extends StatelessWidget {
                 onPressed: () {
                   showDialog(
                       context: context,
-                      child: AlertDialog(
-                          content: SizedBox(
-                              width: 200,
-                              height: 300,
-                              child: ListView.builder(
-                                  itemCount: blackRockStore
-                                      .portfolio.positionsNames.length,
-                                  itemBuilder: (context, index) => Observer(
-                                        builder: (_) => CheckboxListTile(
-                                          title: Text(
-                                              "${blackRockStore.portfolio.positionsNames[index]}"),
-                                          onChanged: (bool value) {
-                                            goalFormStore.changePositions(
-                                                blackRockStore.portfolio
-                                                    .positionsNames[index],
-                                                index);
-                                          },
-                                          value: (goalFormStore.positions
-                                              .contains(blackRockStore.portfolio
-                                                  .positionsNames[index])),
-                                        ),
-                                      )))));
+                      child: Observer(
+                          builder: (_) => AlertDialog(
+                              content: SizedBox(
+                                  width: goalFormStore.test ? 200 : 200,
+                                  height: 300,
+                                  child: ListView.builder(
+                                      itemCount: blackRockStore
+                                          .portfolio.positionsNames.length,
+                                      itemBuilder: (context, index) => Observer(
+                                            builder: (_) => CheckboxListTile(
+                                              title: Text(
+                                                  "${blackRockStore.portfolio.positionsNames[index]}"),
+                                              onChanged: (bool value) {
+                                                goalFormStore.changePositions(
+                                                    blackRockStore.portfolio
+                                                        .positionsNames[index],
+                                                    blackRockStore.portfolio.positionsMap[blackRockStore.portfolio.positionsNames[index]],
+                                                    index);
+                                              },
+                                              value: (goalFormStore.positions
+                                                  .contains(blackRockStore
+                                                      .portfolio
+                                                      .positionsNames[index])),
+                                            ),
+                                          ))))));
                 },
                 child: Row(
                   children: [
@@ -189,7 +192,7 @@ class AddGoalPage extends StatelessWidget {
                 )),
             Observer(
                 builder: (_) => goalFormStore.error != null
-                    ? Text("${goalFormStore.error}")
+                    ? Text("${goalFormStore.error}", style: TextStyle(color: Colors.red),)
                     : Container())
           ],
         )));

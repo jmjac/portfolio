@@ -54,7 +54,6 @@ class HomePage extends StatelessWidget {
                     indicatorSize: 8.0,
                     color: Colors.grey,
                     selectedColor: Colors.black,
-
                   ),
 //                  RaisedButton(
 //                    child: Text('SKIP'),

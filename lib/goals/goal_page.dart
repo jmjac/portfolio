@@ -52,7 +52,7 @@ class GoalPage extends StatelessWidget {
           radius: 160,
           backgroundColor: Colors.white,
           progressColor: Colors.red,
-          percent: goal?.fullfiled ?? 0,
+          percent: goal?.fulfilled ?? 0,
           lineWidth: 10.0,
           animation: true,
           startAngle: 0,
