@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:portfolio/black_rock/black_rock_page.dart';
+import 'package:portfolio/black_rock/store/black_rock.dart';
 import 'package:portfolio/investments/investment_add_page.dart';
 import 'package:portfolio/investments/store/investment_store.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,8 @@ class InvestmentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final InvestmentStore investmentStore =
         Provider.of<InvestmentStore>(context);
+    final BlackRockStore blackRockStore = Provider.of<BlackRockStore>(context);
+
     investmentStore.calculateChange();
     return Scaffold(
       body: Column(
@@ -79,6 +82,9 @@ class InvestmentPage extends StatelessWidget {
                       .remove(investmentStore.portfolio.positionsNames[index]);
                   investmentStore.portfolio.positionsNames.removeAt(index);
                   investmentStore.portfolio.changePositions(positions);
+                  investmentStore.portfolio.getReturnsMap();
+                  blackRockStore.mainData();
+                  investmentStore.calculateChange();
                 },
                 child: Column(children: [
                   ListTile(

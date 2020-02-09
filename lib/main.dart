@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/black_rock/black_rock_page.dart';
 import 'package:portfolio/goals/store/goal_form_store.dart';
+import 'package:portfolio/investments/store/investment_add_store.dart';
 import 'package:portfolio/rootPage.dart';
 import 'package:portfolio/settings/settings_page.dart';
 import 'package:portfolio/settings/store/settings.dart';
@@ -23,12 +24,11 @@ Future<void> main() async {
   final BaseAuth _auth = Auth();
   final SharedPreferences _preferences = await SharedPreferences.getInstance();
 
-  BlackRockAPIPortfolio portfolio =
-      BlackRockAPIPortfolio(positions: {"AOGIX": 66.23, "SSBTX": 33.77},
+  BlackRockAPIPortfolio portfolio = BlackRockAPIPortfolio(
+      positions: {"AOGIX": 66.23, "SSBTX": 33.77},
       startDate: 1546300800000,
       calculatePerformance: true,
-      onlyMonthEndPerfChart: true
-      );
+      onlyMonthEndPerfChart: true);
 
   runApp(MultiProvider(providers: [
     Provider(create: (_) => AuthenticationStore(auth: _auth)),
@@ -37,7 +37,8 @@ Future<void> main() async {
     Provider(create: (_) => BlackRockStore(portfolio)),
     Provider(create: (_) => InvestmentStore(portfolio)),
     Provider(create: (_) => GoalStore(preferences: _preferences)),
-    Provider(create: (_) => GoalFormStore())
+    Provider(create: (_) => GoalFormStore()),
+    Provider(create: (_) => InvestmentAddStore())
   ], child: MyApp()));
 }
 

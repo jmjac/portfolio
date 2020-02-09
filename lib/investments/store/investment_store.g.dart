@@ -42,4 +42,11 @@ mixin _$InvestmentStore on _InvestmentStore, Store {
       _$monthChangeAtom.reportChanged();
     }, _$monthChangeAtom, name: '${_$monthChangeAtom.name}_set');
   }
+
+  final _$calculateChangeAsyncAction = AsyncAction('calculateChange');
+
+  @override
+  Future<void> calculateChange() {
+    return _$calculateChangeAsyncAction.run(() => super.calculateChange());
+  }
 }

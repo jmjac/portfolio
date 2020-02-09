@@ -19,19 +19,6 @@ class AddGoalPage extends StatelessWidget {
     final goalStore = Provider.of<GoalStore>(context);
     final goalFormStore = Provider.of<GoalFormStore>(context);
     final BlackRockStore blackRockStore = Provider.of<BlackRockStore>(context);
-    final Map<String, String> tickerStockData = {
-      "BLK": "BlackRock, Inc.",
-      "APPL": "Apple Inc",
-      "SPY": "S&P 500 Stock Market Index (ETF)",
-      "VT": "Vanguard Total World Stock ETF",
-      "QQQ": "Invesco QQQ Trust ETF",
-      "MSFT": "Microsoft Corporation",
-      "FB": "Facebook, Inc.",
-      "JPM": "JPMorgan Chase & Co.",
-      "MCD": "Mcdonald's Corporation",
-      "WMT": "Walmart Inc.",
-      "XLP": "Consumer Staples Select Sect ETF"
-    };
 
     return Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
@@ -107,6 +94,7 @@ class AddGoalPage extends StatelessWidget {
                 child: Observer(
                   builder: (_) => TextFormField(
                       decoration: InputDecoration(
+                          prefix: Text("\$ "),
                           labelText: "Initial amount invested*",
                           hintText: "Initial amount of money invested"),
                       keyboardType: TextInputType.number,
@@ -122,6 +110,7 @@ class AddGoalPage extends StatelessWidget {
                 child: Observer(
                     builder: (_) => TextFormField(
                             decoration: InputDecoration(
+                                prefix: Text("\$ "),
                                 labelText: "Goal amount*",
                                 hintText:
                                     "Amount of money need to achive the goal"),
@@ -151,7 +140,11 @@ class AddGoalPage extends StatelessWidget {
                                                 goalFormStore.changePositions(
                                                     blackRockStore.portfolio
                                                         .positionsNames[index],
-                                                    blackRockStore.portfolio.positionsMap[blackRockStore.portfolio.positionsNames[index]],
+                                                    blackRockStore.portfolio
+                                                            .positionsMap[
+                                                        blackRockStore.portfolio
+                                                                .positionsNames[
+                                                            index]],
                                                     index);
                                               },
                                               value: (goalFormStore.positions
@@ -205,7 +198,10 @@ class AddGoalPage extends StatelessWidget {
                 )),
             Observer(
                 builder: (_) => goalFormStore.error != null
-                    ? Text("${goalFormStore.error}", style: TextStyle(color: Colors.red),)
+                    ? Text(
+                        "${goalFormStore.error}",
+                        style: TextStyle(color: Colors.red),
+                      )
                     : Container())
           ],
         )));
