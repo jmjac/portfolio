@@ -25,7 +25,8 @@ We learned about the value of design, which was something BlackRock had emphasiz
 ## What's next for Genie
 In the future, we'd like the expand the audience of Genie. People of all ages can find investment a difficult topic to breach, so we want to create a quiz that could develop a profile for a user and recommend stocks to purchase based on their risk tolerance and profit turnover.
 
-## If you want to run this repo on your machine you have to replace the GoogleService-Info.plist with your own. The one in this repo is no longer valid. Or you can just skip the authentication by editing the main and replacing RootPage with HomePage.
+## How Can I run this
+If you want to run this repo on your machine you have to replace the GoogleService-Info.plist with your own. The one in this repo is no longer valid. Or you can just skip the authentication by editing the main and replacing RootPage with HomePage.
 
 ## Creating a new goal
 ![new Goal](images/2newGoal.jpg)
